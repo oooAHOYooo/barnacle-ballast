@@ -32,10 +32,14 @@
                                 }}</p>
                             {% endif %}
                             <div class="d-flex gap-2">
-                                <a
-                                    href="{{ url_for('static', filename=script.filepath) }}"
-                                    class="btn btn-primary btn-sm"
-                                    download>Download</a>
+                                <a href="{{ url_for('view_document', doc_id=script.id) }}"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                                <a href="{{ url_for('download_document', doc_id=script.id) }}"
+                                    class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
                                 <span class="badge bg-secondary">{{
                                     script.document_type.title() }}</span>
                             </div>
@@ -76,10 +80,14 @@
                                 }}</p>
                             {% endif %}
                             <div class="d-flex gap-2">
-                                <a
-                                    href="{{ url_for('static', filename=side.filepath) }}"
-                                    class="btn btn-primary btn-sm"
-                                    download>Download</a>
+                                <a href="{{ url_for('view_document', doc_id=side.id) }}"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                                <a href="{{ url_for('download_document', doc_id=side.id) }}"
+                                    class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
                                 <span class="badge bg-info">{{
                                     side.document_type.title() }}</span>
                             </div>

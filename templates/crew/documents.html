@@ -70,8 +70,14 @@
                     <p class="card-text small">{{ doc.description }}</p>
                     {% endif %}
                     <div class="d-flex gap-2">
-                        <a href="{{ url_for('static', filename=doc.filepath) }}"
-                            class="btn btn-primary btn-sm" download>Download</a>
+                        <a href="{{ url_for('view_document', doc_id=doc.id) }}"
+                            class="btn btn-primary btn-sm">
+                            <i class="fas fa-eye"></i> View
+                        </a>
+                        <a href="{{ url_for('download_document', doc_id=doc.id) }}"
+                            class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-download"></i> Download
+                        </a>
                         {% if doc.created_by %}
                         <small class="text-muted align-self-center">by {{
                             doc.created_by }}</small>

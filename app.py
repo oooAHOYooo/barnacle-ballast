@@ -365,6 +365,24 @@ def upload_file():
 def favicon():
     return app.send_static_file('favicon/favicon.ico')
 
+@app.route('/view/<int:doc_id>')
+def view_document(doc_id):
+    """View document in PDF viewer"""
+    if not session.get('crew_logged_in'):
+        return redirect(url_for('crew_login'))
+    
+    document = Document.query.get_or_404(doc_id)
+    return render_template('crew/document_viewer.html', document=document)
+
+@app.route('/download/<int:doc_id>')
+def download_document(doc_id):
+    """Download document file"""
+    if not session.get('crew_logged_in'):
+        return redirect(url_for('crew_login'))
+    
+    document = Document.query.get_or_404(doc_id)
+    return send_file(f'static/{document.filepath}', as_attachment=True, download_name=document.filename)
+
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('errors/404.html'), 404

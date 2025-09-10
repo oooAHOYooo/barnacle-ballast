@@ -372,4 +372,6 @@ def create_tables():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+        # Create initial call sheet for September 21st
+        create_tables()
     app.run(debug=True, host='0.0.0.0', port=5001)

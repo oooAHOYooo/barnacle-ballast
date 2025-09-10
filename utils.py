@@ -3,7 +3,6 @@ Utility functions for Barnacle Ballast Inc.
 """
 
 import os
-import requests
 from datetime import datetime, timedelta
 from flask import current_app
 import json

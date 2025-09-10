@@ -16,7 +16,12 @@
 
                         <div class="mb-3">
                             {{ form.password.label(class="form-label") }}
-                            {{ form.password(class="form-control", value="STUDIO!@#") }}
+                            <div class="input-group">
+                                {{ form.password(class="form-control", value="STUDIO!@#", id="password-field") }}
+                                <button class="btn btn-outline-secondary" type="button" id="toggle-password">
+                                    <span id="toggle-icon">👁️</span>
+                                </button>
+                            </div>
                             {% if form.password.errors %}
                                 <div class="text-danger small">
                                     {% for error in form.password.errors %}
@@ -59,4 +64,24 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggle-password');
+    const passwordField = document.getElementById('password-field');
+    const toggleIcon = document.getElementById('toggle-icon');
+    
+    toggleButton.addEventListener('click', function() {
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleIcon.textContent = '🙈';
+        } else {
+            passwordField.type = 'password';
+            toggleIcon.textContent = '👁️';
+        }
+    });
+});
+</script>
 {% endblock %}

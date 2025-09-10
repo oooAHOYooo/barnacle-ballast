@@ -402,6 +402,7 @@ def create_tables():
             # Main Script
             main_script = Document(
                 title="BARNACLE - Main Script",
+                filename="barnacle_main_script.pdf",
                 document_type='script',
                 filepath='documents/scripts/barnacle_main_script.pdf',
                 description='Complete feature script - A Father. A Son. A Marsh That Remembers Everything.',
@@ -412,6 +413,7 @@ def create_tables():
             # Shooting Script
             shooting_script = Document(
                 title="BARNACLE - Shooting Script v2.1",
+                filename="barnacle_shooting_script_v2.1.pdf",
                 document_type='script',
                 filepath='documents/scripts/barnacle_shooting_script_v2.1.pdf',
                 description='Revised shooting script with scene numbers and technical notes',
@@ -422,6 +424,7 @@ def create_tables():
             # Sides for September 21st
             sides_921 = Document(
                 title="Sides - September 21st",
+                filename="sides_sept_21.pdf",
                 document_type='sides',
                 filepath='documents/sides/sides_sept_21.pdf',
                 description='Daily sides for equipment test day - Mac and Dallas scenes',
@@ -432,6 +435,7 @@ def create_tables():
             # Storyboards
             storyboard_1 = Document(
                 title="BARNACLE - Storyboards Part 1",
+                filename="barnacle_storyboards_part1.pdf",
                 document_type='document',
                 filepath='documents/storyboards/barnacle_storyboards_part1.pdf',
                 description='Visual storyboards for opening sequences and marsh scenes',
@@ -441,6 +445,7 @@ def create_tables():
 
             storyboard_2 = Document(
                 title="BARNACLE - Storyboards Part 2",
+                filename="barnacle_storyboards_part2.pdf",
                 document_type='document',
                 filepath='documents/storyboards/barnacle_storyboards_part2.pdf',
                 description='Storyboards for father-son dialogue scenes and climax',
@@ -451,6 +456,7 @@ def create_tables():
             # Production Documents
             production_bible = Document(
                 title="BARNACLE - Production Bible",
+                filename="barnacle_production_bible.pdf",
                 document_type='document',
                 filepath='documents/production/barnacle_production_bible.pdf',
                 description='Complete production guide with character backgrounds, locations, and technical specs',
@@ -461,6 +467,7 @@ def create_tables():
             # Location Scouting
             location_photos = Document(
                 title="Location Scouting Photos",
+                filename="location_scouting_photos.pdf",
                 document_type='photo',
                 filepath='documents/locations/location_scouting_photos.pdf',
                 description='Reference photos from Bole\'s Residency and surrounding marsh areas',
@@ -471,6 +478,7 @@ def create_tables():
             # Character References
             character_refs = Document(
                 title="Character Reference Guide",
+                filename="character_reference_guide.pdf",
                 document_type='document',
                 filepath='documents/characters/character_reference_guide.pdf',
                 description='Character descriptions, motivations, and relationship dynamics',

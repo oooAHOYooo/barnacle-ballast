@@ -9,14 +9,11 @@
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <h1 class="display-4 fw-bold mb-4 text-shadow">
-                    Currently in Production
+                    A Father. A Son. A Marsh That Remembers Everything.
                 </h1>
                 <h2 class="h3 mb-4">"Creatures in the Tall Grass"</h2>
                 <p class="lead mb-4">
-                    An intimate character study exploring the complex
-                    relationship between a father and son
-                    as they navigate the challenges of rural life and family
-                    dynamics.
+                    Stories surface when you're not looking.
                 </p>
                 <div class="d-flex gap-3">
                     <a href="{{ url_for('projects') }}"
@@ -27,10 +24,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="text-center">
-                    <div class="badge badge-production fs-5 mb-3">Equipment Test
-                        Shoot</div>
-                    <div class="fs-4 mb-2">September 21, 2025</div>
-                    <div class="fs-6">Bole's Residency</div>
+                    <div class="badge badge-production fs-5 mb-3">In Production</div>
+                    <div class="fs-4 mb-2">September 2025</div>
+                    <div class="fs-6">Rural Location</div>
                 </div>
             </div>
         </div>
@@ -44,29 +40,27 @@
             <div class="col-md-4 text-center mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Current Phase</h5>
-                        <p class="card-text">Equipment Testing & Character
-                            Chemistry</p>
-                        <span class="badge bg-primary">In Progress</span>
+                        <h5 class="card-title">Status</h5>
+                        <p class="card-text">In Production</p>
+                        <span class="badge bg-primary">Active</span>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 text-center mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Next Shoot</h5>
-                        <p class="card-text">September 21, 2025</p>
-                        <div id="countdown"
-                            class="text-primary fw-bold">Loading...</div>
+                        <h5 class="card-title">Format</h5>
+                        <p class="card-text">Digital</p>
+                        <div class="text-primary fw-bold">Independent</div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 text-center mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">Location</h5>
-                        <p class="card-text">Bole's Residency</p>
-                        <span class="badge bg-secondary">Rural Setting</span>
+                        <h5 class="card-title">Genre</h5>
+                        <p class="card-text">Drama</p>
+                        <span class="badge bg-secondary">Character Study</span>
                     </div>
                 </div>
             </div>
@@ -79,7 +73,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <h2 class="mb-4">Latest from Production</h2>
+                <h2 class="mb-4">Production Notes</h2>
                 {% if posts %}
                 {% for post in posts %}
                 <div class="card mb-4">
@@ -104,9 +98,8 @@
                 {% endfor %}
                 {% else %}
                 <div class="text-center py-5">
-                    <h4>Production Blog Coming Soon</h4>
-                    <p class="text-muted">Behind-the-scenes content will be
-                        posted here during production.</p>
+                    <h4>Stories Surface When You're Not Looking</h4>
+                    <p class="text-muted">Production updates will appear here as the project develops.</p>
                 </div>
                 {% endif %}
             </div>
@@ -121,17 +114,14 @@
                             <div id="weather-info">Loading weather...</div>
                         </div>
                         <div class="mb-3">
-                            <h6>Quick Links</h6>
+                            <h6>Information</h6>
                             <ul class="list-unstyled">
-                                <li><a href="{{ url_for('crew_login') }}"
-                                        class="text-decoration-none">Crew
-                                        Portal</a></li>
                                 <li><a href="{{ url_for('contact') }}"
-                                        class="text-decoration-none">Contact
-                                        Production</a></li>
-                                <li><a href="{{ url_for('projects') }}"
-                                        class="text-decoration-none">View All
-                                        Projects</a></li>
+                                        class="text-decoration-none">Contact</a></li>
+                                <li><a href="{{ url_for('about') }}"
+                                        class="text-decoration-none">About</a></li>
+                                <li><small class="text-muted"><a href="{{ url_for('crew_login') }}"
+                                        class="text-decoration-none">Crew Access</a></small></li>
                             </ul>
                         </div>
                     </div>

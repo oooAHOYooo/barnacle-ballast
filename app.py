@@ -338,6 +338,10 @@ def upload_file():
     return jsonify({'error': 'Invalid file type'}), 400
 
 # Error handlers
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('favicon/favicon.ico')
+
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('errors/404.html'), 404

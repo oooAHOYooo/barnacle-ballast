@@ -415,29 +415,18 @@ def create_tables():
             db.session.add(call_sheet)
             db.session.commit()
 
-        # Create sample scripts and storyboards
+        # Create real scripts and storyboards
         if not Document.query.filter_by(document_type='script').first():
-            # Main Script
+            # Real Main Script
             main_script = Document(
-                title="BARNACLE - Main Script",
-                filename="barnacle_main_script.pdf",
+                title="Creatures in the Tall Grass - Script",
+                filename="printed-4-25_[4-04-25][creatures-in-the-tallgrass]-B.pdf",
                 document_type='script',
-                filepath='documents/scripts/barnacle_main_script.pdf',
+                filepath='documents/scripts/printed-4-25_[4-04-25][creatures-in-the-tallgrass]-B.pdf',
                 description='Complete feature script - A Father. A Son. A Marsh That Remembers Everything.',
                 created_by='Director'
             )
             db.session.add(main_script)
-
-            # Shooting Script
-            shooting_script = Document(
-                title="BARNACLE - Shooting Script v2.1",
-                filename="barnacle_shooting_script_v2.1.pdf",
-                document_type='script',
-                filepath='documents/scripts/barnacle_shooting_script_v2.1.pdf',
-                description='Revised shooting script with scene numbers and technical notes',
-                created_by='Director'
-            )
-            db.session.add(shooting_script)
 
             # Sides for September 21st
             sides_921 = Document(
@@ -450,26 +439,16 @@ def create_tables():
             )
             db.session.add(sides_921)
 
-            # Storyboards
-            storyboard_1 = Document(
-                title="BARNACLE - Storyboards Part 1",
-                filename="barnacle_storyboards_part1.pdf",
+            # Real Storyboards
+            storyboard_dev = Document(
+                title="Storyboard - Development",
+                filename="Storyboard - Development.pdf",
                 document_type='document',
-                filepath='documents/storyboards/barnacle_storyboards_part1.pdf',
-                description='Visual storyboards for opening sequences and marsh scenes',
+                filepath='documents/storyboards/Storyboard - Development.pdf',
+                description='Complete visual storyboards for BARNACLE development and production planning',
                 created_by='Director'
             )
-            db.session.add(storyboard_1)
-
-            storyboard_2 = Document(
-                title="BARNACLE - Storyboards Part 2",
-                filename="barnacle_storyboards_part2.pdf",
-                document_type='document',
-                filepath='documents/storyboards/barnacle_storyboards_part2.pdf',
-                description='Storyboards for father-son dialogue scenes and climax',
-                created_by='Director'
-            )
-            db.session.add(storyboard_2)
+            db.session.add(storyboard_dev)
 
             # Production Documents
             production_bible = Document(

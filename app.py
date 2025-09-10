@@ -240,6 +240,29 @@ def crew_scripts():
     
     return render_template('crew/scripts.html', scripts=scripts, sides=sides)
 
+@app.route('/crew/storyboards')
+def crew_storyboards():
+    """Crew storyboards page"""
+    if not session.get('crew_logged_in'):
+        return redirect(url_for('crew_login'))
+    
+    # Get storyboards and visual references from database
+    storyboards = Document.query.filter(
+        (Document.document_type == 'document') & 
+        (Document.title.contains('Storyboard'))
+    ).order_by(Document.created_at.desc()).all()
+    
+    visual_refs = Document.query.filter(
+        (Document.document_type == 'photo') | 
+        (Document.document_type == 'document')
+    ).filter(
+        (Document.title.contains('Location')) |
+        (Document.title.contains('Character')) |
+        (Document.title.contains('Reference'))
+    ).order_by(Document.created_at.desc()).all()
+    
+    return render_template('crew/storyboards.html', storyboards=storyboards, visual_refs=visual_refs)
+
 @app.route('/crew/schedule')
 def crew_schedule():
     """Production schedule calendar"""
@@ -372,6 +395,89 @@ def create_tables():
                 scenes="Equipment tests and character chemistry"
             )
             db.session.add(call_sheet)
+            db.session.commit()
+
+        # Create sample scripts and storyboards
+        if not Document.query.filter_by(document_type='script').first():
+            # Main Script
+            main_script = Document(
+                title="BARNACLE - Main Script",
+                document_type='script',
+                filepath='documents/scripts/barnacle_main_script.pdf',
+                description='Complete feature script - A Father. A Son. A Marsh That Remembers Everything.',
+                created_by='Director'
+            )
+            db.session.add(main_script)
+
+            # Shooting Script
+            shooting_script = Document(
+                title="BARNACLE - Shooting Script v2.1",
+                document_type='script',
+                filepath='documents/scripts/barnacle_shooting_script_v2.1.pdf',
+                description='Revised shooting script with scene numbers and technical notes',
+                created_by='Director'
+            )
+            db.session.add(shooting_script)
+
+            # Sides for September 21st
+            sides_921 = Document(
+                title="Sides - September 21st",
+                document_type='sides',
+                filepath='documents/sides/sides_sept_21.pdf',
+                description='Daily sides for equipment test day - Mac and Dallas scenes',
+                created_by='Script Supervisor'
+            )
+            db.session.add(sides_921)
+
+            # Storyboards
+            storyboard_1 = Document(
+                title="BARNACLE - Storyboards Part 1",
+                document_type='document',
+                filepath='documents/storyboards/barnacle_storyboards_part1.pdf',
+                description='Visual storyboards for opening sequences and marsh scenes',
+                created_by='Director'
+            )
+            db.session.add(storyboard_1)
+
+            storyboard_2 = Document(
+                title="BARNACLE - Storyboards Part 2",
+                document_type='document',
+                filepath='documents/storyboards/barnacle_storyboards_part2.pdf',
+                description='Storyboards for father-son dialogue scenes and climax',
+                created_by='Director'
+            )
+            db.session.add(storyboard_2)
+
+            # Production Documents
+            production_bible = Document(
+                title="BARNACLE - Production Bible",
+                document_type='document',
+                filepath='documents/production/barnacle_production_bible.pdf',
+                description='Complete production guide with character backgrounds, locations, and technical specs',
+                created_by='Producer'
+            )
+            db.session.add(production_bible)
+
+            # Location Scouting
+            location_photos = Document(
+                title="Location Scouting Photos",
+                document_type='photo',
+                filepath='documents/locations/location_scouting_photos.pdf',
+                description='Reference photos from Bole\'s Residency and surrounding marsh areas',
+                created_by='Location Manager'
+            )
+            db.session.add(location_photos)
+
+            # Character References
+            character_refs = Document(
+                title="Character Reference Guide",
+                document_type='document',
+                filepath='documents/characters/character_reference_guide.pdf',
+                description='Character descriptions, motivations, and relationship dynamics',
+                created_by='Director'
+            )
+            db.session.add(character_refs)
+
             db.session.commit()
 
 def find_available_port(start_port=5000, max_attempts=10):

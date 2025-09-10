@@ -1,103 +1,96 @@
-/* Crew Portal Specific Styles */
+/* Clean Crew Portal Styles */
 
 .crew-portal {
-    background-color: var(--bb-dark);
+    background-color: #f8f9fa;
     min-height: 100vh;
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
 }
 
 .crew-nav {
-    background-color: rgba(26, 52, 56, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--bb-dark);
+    border-bottom: 1px solid var(--bb-border);
 }
 
 .crew-nav .navbar-brand {
-    font-weight: bold;
-    letter-spacing: 0.5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 16px;
 }
 
 .crew-nav .nav-link {
-    color: rgba(255, 255, 255, 0.9);
+    color: white;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     transition: color 0.2s ease;
 }
 
 .crew-nav .nav-link:hover {
-    color: var(--bb-accent);
+    color: var(--bb-light);
 }
 
-/* Crew Dashboard Styles */
+/* Clean Crew Dashboard */
 .crew-dashboard {
-    background: linear-gradient(135deg, var(--bb-dark) 0%, #2c5f63 100%);
+    background-color: #f8f9fa;
 }
 
 .dashboard-card {
-    background: rgba(255, 255, 255, 0.95);
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: white;
+    border: 1px solid var(--bb-border);
+    border-radius: 0;
+    box-shadow: none;
+    transition: border-color 0.2s ease;
 }
 
 .dashboard-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border-color: var(--bb-dark);
 }
 
-/* Call Sheet Styles */
+/* Clean Call Sheet Styles */
 .call-sheet-card {
-    border-left: 4px solid var(--bb-primary);
-    transition: all 0.2s ease;
+    border-left: 3px solid var(--bb-dark);
+    transition: border-color 0.2s ease;
 }
 
 .call-sheet-card:hover {
-    border-left-color: var(--bb-accent);
-    transform: translateX(5px);
+    border-left-color: var(--bb-primary);
 }
 
 .call-sheet-header {
-    background: linear-gradient(90deg, var(--bb-primary) 0%, var(--bb-secondary) 100%);
+    background-color: var(--bb-dark);
     color: white;
     padding: 1.5rem;
-    border-radius: 8px 8px 0 0;
-    position: relative;
+    border: 1px solid var(--bb-border);
 }
 
 .call-sheet-header::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 20px;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid var(--bb-secondary);
+    display: none;
 }
 
-/* Emergency Contact Styles */
+/* Clean Emergency Contact Styles */
 .emergency-contact {
-    border-left: 4px solid #dc3545;
+    border-left: 3px solid var(--bb-dark);
     padding: 0.75rem 1rem;
     margin-bottom: 0.5rem;
-    background: rgba(220, 53, 69, 0.05);
-    border-radius: 0 8px 8px 0;
-    transition: all 0.2s ease;
+    background: var(--bb-light);
+    transition: background-color 0.2s ease;
     cursor: pointer;
 }
 
 .emergency-contact:hover {
-    background: rgba(220, 53, 69, 0.1);
-    transform: translateX(5px);
+    background: #e9ecef;
 }
 
 .emergency-contact strong {
-    color: #dc3545;
+    color: var(--bb-dark);
     display: block;
     margin-bottom: 0.25rem;
+    font-weight: 600;
 }
 
 .emergency-contact small {
-    color: #6c757d;
+    color: var(--bb-secondary);
+    font-size: 12px;
 }
 
 /* Weather Widget Styles */

@@ -23,7 +23,7 @@
                     <div>
                         <span class="badge bg-primary">{{
                             sheet.date.strftime('%b %d, %Y') }}</span>
-                        {% set days_diff = (sheet.date - today).days %}
+                        {% set days_diff = (sheet.date - moment().date()).days %}
                         {% if days_diff == 0 %}
                         <span class="badge bg-warning ms-1">TODAY</span>
                         {% elif days_diff == 1 %}

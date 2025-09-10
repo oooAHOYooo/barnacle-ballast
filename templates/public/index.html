@@ -16,17 +16,17 @@
                     Stories surface when you're not looking.
                 </p>
                 <div class="d-flex gap-3">
+                    <a href="{{ url_for('crew_login') }}"
+                        class="btn btn-light btn-lg">CREW PORTAL</a>
                     <a href="{{ url_for('projects') }}"
                         class="btn btn-outline-light btn-lg">View Project</a>
-                    <a href="{{ url_for('blog') }}"
-                        class="btn btn-light btn-lg">Production Blog</a>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="text-center">
-                    <div class="badge badge-production fs-5 mb-3">In Production</div>
-                    <div class="fs-4 mb-2">September 2025</div>
-                    <div class="fs-6">Rural Location</div>
+                    <div class="badge badge-production fs-5 mb-3">CREW ACCESS</div>
+                    <div class="fs-4 mb-2">Password: STUDIO!@#</div>
+                    <div class="fs-6">Production Portal</div>
                 </div>
             </div>
         </div>
@@ -131,20 +131,35 @@
     </div>
 </section>
 
-<!-- Newsletter Signup -->
+<!-- Crew Portal Section -->
 <section class="py-5 bg-primary text-white">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-6 text-center">
-                <h3 class="mb-3">Stay Updated</h3>
-                <p class="mb-4">Get the latest production updates and
-                    behind-the-scenes content delivered to your inbox.</p>
-                <form class="d-flex gap-2">
-                    <input type="email" class="form-control"
-                        placeholder="Enter your email">
-                    <button type="submit"
-                        class="btn btn-light">Subscribe</button>
-                </form>
+            <div class="col-lg-8 text-center">
+                <h3 class="mb-3">CREW PORTAL</h3>
+                <p class="mb-4">Access call sheets, scripts, schedules, and production information.</p>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card bg-dark text-white">
+                            <div class="card-body">
+                                <h5>CAST & CREW</h5>
+                                <p class="small">Mac, Dallas, and production team</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card bg-dark text-white">
+                            <div class="card-body">
+                                <h5>PRODUCTION INFO</h5>
+                                <p class="small">Call sheets, scripts, contacts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <a href="{{ url_for('crew_login') }}" class="btn btn-light btn-lg">ACCESS CREW PORTAL</a>
+                    <p class="small mt-2">Password: STUDIO!@#</p>
+                </div>
             </div>
         </div>
     </div>

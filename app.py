@@ -247,7 +247,8 @@ def crew_schedule():
         return redirect(url_for('crew_login'))
     
     call_sheets = CallSheet.query.order_by(CallSheet.date).all()
-    return render_template('crew/schedule.html', call_sheets=call_sheets)
+    today = datetime.now().date()
+    return render_template('crew/schedule.html', call_sheets=call_sheets, today=today)
 
 @app.route('/crew/dailies')
 def crew_dailies():

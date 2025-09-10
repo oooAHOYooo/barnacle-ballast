@@ -1,0 +1,157 @@
+{% extends "crew_base.html" %}
+
+{% block title %}Scripts & Sides - Crew Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="text-white">Scripts & Sides</h1>
+            <p class="text-light">Download latest scripts, sides, and production
+                documents</p>
+        </div>
+    </div>
+
+    <!-- Scripts Section -->
+    <div class="row mb-5">
+        <div class="col">
+            <h3 class="text-white mb-3">Scripts</h3>
+            {% if scripts %}
+            <div class="row">
+                {% for script in scripts %}
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ script.title }}</h5>
+                            <p class="card-text small text-muted">
+                                Uploaded: {{
+                                script.created_at.strftime('%B %d, %Y') }}
+                            </p>
+                            {% if script.description %}
+                            <p class="card-text small">{{ script.description
+                                }}</p>
+                            {% endif %}
+                            <div class="d-flex gap-2">
+                                <a
+                                    href="{{ url_for('static', filename=script.filepath) }}"
+                                    class="btn btn-primary btn-sm"
+                                    download>Download</a>
+                                <span class="badge bg-secondary">{{
+                                    script.document_type.title() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <h4>No Scripts Available</h4>
+                    <p class="text-muted">Scripts will appear here once they're
+                        uploaded.</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Sides Section -->
+    <div class="row mb-5">
+        <div class="col">
+            <h3 class="text-white mb-3">Sides</h3>
+            {% if sides %}
+            <div class="row">
+                {% for side in sides %}
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ side.title }}</h5>
+                            <p class="card-text small text-muted">
+                                Uploaded: {{
+                                side.created_at.strftime('%B %d, %Y') }}
+                            </p>
+                            {% if side.description %}
+                            <p class="card-text small">{{ side.description
+                                }}</p>
+                            {% endif %}
+                            <div class="d-flex gap-2">
+                                <a
+                                    href="{{ url_for('static', filename=side.filepath) }}"
+                                    class="btn btn-primary btn-sm"
+                                    download>Download</a>
+                                <span class="badge bg-info">{{
+                                    side.document_type.title() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <h4>No Sides Available</h4>
+                    <p class="text-muted">Sides will appear here once they're
+                        uploaded.</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Upload New Document</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data"
+                        action="/upload">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="title"
+                                        class="form-label">Document
+                                        Title</label>
+                                    <input type="text" class="form-control"
+                                        name="title" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="type"
+                                        class="form-label">Document Type</label>
+                                    <select class="form-select" name="type"
+                                        required>
+                                        <option value="script">Script</option>
+                                        <option value="sides">Sides</option>
+                                        <option value="document">General
+                                            Document</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">File</label>
+                            <input type="file" class="form-control" name="file"
+                                accept=".pdf,.doc,.docx,.txt" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description"
+                                class="form-label">Description
+                                (Optional)</label>
+                            <textarea class="form-control" name="description"
+                                rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload
+                            Document</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

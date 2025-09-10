@@ -1,0 +1,249 @@
+{% extends "crew_base.html" %}
+
+{% block title %}Contacts - Crew Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="text-white">Contact Directory</h1>
+            <p class="text-light">Cast, crew, and vendor contact information</p>
+        </div>
+    </div>
+
+    <!-- Emergency Contacts -->
+    <div class="row mb-5">
+        <div class="col">
+            <h3 class="text-white mb-3">Emergency Contacts</h3>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-3">
+                    <div class="card emergency-contact-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-danger">Mac (Father)</h5>
+                            <p class="card-text">Cast - Father</p>
+                            <div class="d-flex gap-2 justify-content-center">
+                                <a href="tel:5551234567"
+                                    class="btn btn-outline-danger btn-sm">Call</a>
+                                <a href="sms:5551234567"
+                                    class="btn btn-outline-danger btn-sm">SMS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-3">
+                    <div class="card emergency-contact-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-danger">Dallas (Son)</h5>
+                            <p class="card-text">Cast - Son</p>
+                            <div class="d-flex gap-2 justify-content-center">
+                                <a href="tel:5552345678"
+                                    class="btn btn-outline-danger btn-sm">Call</a>
+                                <a href="sms:5552345678"
+                                    class="btn btn-outline-danger btn-sm">SMS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-3">
+                    <div class="card emergency-contact-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-danger">Director</h5>
+                            <p class="card-text">Production</p>
+                            <div class="d-flex gap-2 justify-content-center">
+                                <a href="tel:5553456789"
+                                    class="btn btn-outline-danger btn-sm">Call</a>
+                                <a href="sms:5553456789"
+                                    class="btn btn-outline-danger btn-sm">SMS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-3">
+                    <div class="card emergency-contact-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-danger">Production
+                                Office</h5>
+                            <p class="card-text">General</p>
+                            <div class="d-flex gap-2 justify-content-center">
+                                <a href="tel:5554567890"
+                                    class="btn btn-outline-danger btn-sm">Call</a>
+                                <a href="sms:5554567890"
+                                    class="btn btn-outline-danger btn-sm">SMS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cast & Crew Directory -->
+    <div class="row mb-5">
+        <div class="col">
+            <h3 class="text-white mb-3">Cast & Crew Directory</h3>
+            {% if contacts %}
+            <div class="row">
+                {% for contact in contacts %}
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ contact.name }}</h5>
+                            <p class="card-text">
+                                <strong>Role:</strong> {{ contact.role }}<br>
+                                {% if contact.department %}
+                                <strong>Department:</strong> {{
+                                contact.department.title() }}<br>
+                                {% endif %}
+                                {% if contact.phone %}
+                                <strong>Phone:</strong> {{ contact.phone }}<br>
+                                {% endif %}
+                                {% if contact.email %}
+                                <strong>Email:</strong> {{ contact.email }}
+                                {% endif %}
+                            </p>
+                            {% if contact.notes %}
+                            <p class="card-text small text-muted">{{
+                                contact.notes }}</p>
+                            {% endif %}
+                            <div class="d-flex gap-2">
+                                {% if contact.phone %}
+                                <a
+                                    href="tel:{{ contact.phone.replace('(', '').replace(')', '').replace('-', '').replace(' ', '') }}"
+                                    class="btn btn-outline-primary btn-sm">Call</a>
+                                {% endif %}
+                                {% if contact.email %}
+                                <a href="mailto:{{ contact.email }}"
+                                    class="btn btn-outline-primary btn-sm">Email</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <h4>No Contacts Available</h4>
+                    <p class="text-muted">Contact information will appear here
+                        once it's added to the directory.</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Add Contact Form -->
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Add New Contact</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name"
+                                        class="form-label">Name</label>
+                                    <input type="text" class="form-control"
+                                        name="name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="role"
+                                        class="form-label">Role/Position</label>
+                                    <input type="text" class="form-control"
+                                        name="role" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="phone"
+                                        class="form-label">Phone</label>
+                                    <input type="tel" class="form-control"
+                                        name="phone">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="email"
+                                        class="form-label">Email</label>
+                                    <input type="email" class="form-control"
+                                        name="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="department"
+                                        class="form-label">Department</label>
+                                    <select class="form-select"
+                                        name="department">
+                                        <option value>Select Department</option>
+                                        <option value="cast">Cast</option>
+                                        <option value="camera">Camera</option>
+                                        <option value="sound">Sound</option>
+                                        <option
+                                            value="production">Production</option>
+                                        <option value="art">Art
+                                            Department</option>
+                                        <option value="costume">Costume</option>
+                                        <option value="makeup">Makeup</option>
+                                        <option
+                                            value="transportation">Transportation</option>
+                                        <option
+                                            value="catering">Catering</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <div class="form-check mt-4">
+                                        <input class="form-check-input"
+                                            type="checkbox"
+                                            name="emergency_contact"
+                                            id="emergency_contact">
+                                        <label class="form-check-label"
+                                            for="emergency_contact">
+                                            Emergency Contact
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Notes</label>
+                            <textarea class="form-control" name="notes"
+                                rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add
+                            Contact</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.emergency-contact-card {
+    border-left: 4px solid #dc3545;
+    background: rgba(220, 53, 69, 0.05);
+}
+
+.emergency-contact-card:hover {
+    background: rgba(220, 53, 69, 0.1);
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,188 @@
+{% extends "crew_base.html" %}
+
+{% block title %}{{ call_sheet.title }} - Call Sheet{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <a href="{{ url_for('crew_callsheets') }}"
+                class="btn btn-outline-light mb-3">← Back to Call Sheets</a>
+            <h1 class="text-white">{{ call_sheet.title }}</h1>
+            <p class="text-light">{{ call_sheet.date.strftime('%A, %B %d, %Y')
+                }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="call-sheet-header">
+                    <h4 class="mb-0">Production Information</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Schedule</h6>
+                            <p><strong>Date:</strong> {{
+                                call_sheet.date.strftime('%B %d, %Y') }}</p>
+                            <p><strong>Call Time:</strong> {{
+                                call_sheet.call_time }}</p>
+                            <p><strong>Wrap Time:</strong> {{
+                                call_sheet.wrap_time }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Location</h6>
+                            <p><strong>Venue:</strong> {{ call_sheet.location
+                                }}</p>
+                            {% if call_sheet.weather_contingency %}
+                            <p><strong>Weather Plan:</strong> {{
+                                call_sheet.weather_contingency }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if call_sheet.cast_notes %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Cast Information</h6>
+                </div>
+                <div class="card-body">
+                    <p>{{ call_sheet.cast_notes }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if call_sheet.crew_notes %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Crew Information</h6>
+                </div>
+                <div class="card-body">
+                    <p>{{ call_sheet.crew_notes }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if call_sheet.scenes %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Scenes to be Shot</h6>
+                </div>
+                <div class="card-body">
+                    <p>{{ call_sheet.scenes }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if call_sheet.special_notes %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Special Notes</h6>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <p class="mb-0">{{ call_sheet.special_notes }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Emergency Contacts -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Emergency Contacts</h6>
+                </div>
+                <div class="card-body">
+                    <div class="emergency-contact mb-2">
+                        <strong>Mac (Father)</strong><br>
+                        <small class="text-muted">(555) 123-4567</small>
+                    </div>
+                    <div class="emergency-contact mb-2">
+                        <strong>Dallas (Son)</strong><br>
+                        <small class="text-muted">(555) 234-5678</small>
+                    </div>
+                    <div class="emergency-contact mb-2">
+                        <strong>Director</strong><br>
+                        <small class="text-muted">(555) 345-6789</small>
+                    </div>
+                    <div class="emergency-contact">
+                        <strong>Production</strong><br>
+                        <small class="text-muted">(555) 456-7890</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Widget -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Weather Forecast</h6>
+                </div>
+                <div class="card-body">
+                    <div id="weather-widget">
+                        <div class="text-center">
+                            <div class="spinner"></div>
+                            <p class="small text-muted">Loading weather...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Quick Actions</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('crew_scripts') }}"
+                            class="btn btn-outline-primary btn-sm">View
+                            Scripts</a>
+                        <a href="{{ url_for('crew_contacts') }}"
+                            class="btn btn-outline-primary btn-sm">Contact
+                            Directory</a>
+                        <a href="{{ url_for('crew_schedule') }}"
+                            class="btn btn-outline-primary btn-sm">Full
+                            Schedule</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Weather widget
+function updateWeather() {
+    fetch('/api/weather')
+        .then(response => response.json())
+        .then(data => {
+            const weatherHtml = `
+                <div class="text-center">
+                    <div class="fs-4 text-primary">${data.temperature}</div>
+                    <div class="small text-muted">${data.condition}</div>
+                    <div class="small text-muted">${data.location}</div>
+                    <div class="small text-muted">Updated: ${data.updated}</div>
+                </div>
+            `;
+            document.getElementById('weather-widget').innerHTML = weatherHtml;
+        })
+        .catch(error => {
+            document.getElementById('weather-widget').innerHTML = `
+                <div class="text-center text-muted">
+                    <p>Weather unavailable</p>
+                </div>
+            `;
+        });
+}
+
+// Update weather on page load
+updateWeather();
+</script>
+{% endblock %}

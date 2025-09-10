@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}Projects - Barnacle Ballast Inc.{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h1 class="display-4 text-center mb-5">Our Projects</h1>
+
+            <!-- Current Project -->
+            <div class="card mb-5">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <div
+                            class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center"
+                            style="height: 300px;">
+                            <div class="text-center text-white">
+                                <h3>Creatures in the Tall Grass</h3>
+                                <p class="mb-0">Currently in Production</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title">Creatures in the Tall
+                                Grass</h2>
+                            <p class="card-text">
+                                <span class="badge bg-primary mb-2">In
+                                    Production</span>
+                            </p>
+                            <p class="card-text">
+                                An intimate character study exploring the
+                                complex relationship between a father and son
+                                as they navigate the challenges of rural life
+                                and family dynamics. Set against the
+                                backdrop of a changing agricultural landscape,
+                                the film examines themes of connection,
+                                loss, and the resilience of the human spirit.
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Production Details</h6>
+                                    <ul class="list-unstyled">
+                                        <li><strong>Genre:</strong> Drama</li>
+                                        <li><strong>Format:</strong>
+                                            Digital</li>
+                                        <li><strong>Location:</strong> Rural
+                                            Setting</li>
+                                        <li><strong>Status:</strong> Equipment
+                                            Testing</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Key Information</h6>
+                                    <ul class="list-unstyled">
+                                        <li><strong>Next Shoot:</strong>
+                                            September 21, 2025</li>
+                                        <li><strong>Location:</strong> Bole's
+                                            Residency</li>
+                                        <li><strong>Phase:</strong> Equipment
+                                            Testing</li>
+                                        <li><strong>Focus:</strong> Character
+                                            Chemistry</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development Pipeline -->
+            <div class="card mb-5">
+                <div class="card-header">
+                    <h3 class="mb-0">Development Pipeline</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Pre-Production</h5>
+                                    <p class="card-text">Script development,
+                                        casting, and location scouting</p>
+                                    <span class="badge bg-success">In
+                                        Progress</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Production</h5>
+                                    <p class="card-text">Principal photography
+                                        and equipment testing</p>
+                                    <span
+                                        class="badge bg-warning">Upcoming</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Post-Production</h5>
+                                    <p class="card-text">Editing, sound design,
+                                        and color grading</p>
+                                    <span
+                                        class="badge bg-secondary">Planned</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What We're Working On Next -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">What We're Working On Next</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Immediate Focus</h5>
+                            <ul>
+                                <li>Equipment testing and comparison (RED KOMODO
+                                    vs BMPCC4K)</li>
+                                <li>Character chemistry development with
+                                    cast</li>
+                                <li>Location scouting and preparation</li>
+                                <li>Technical workflow optimization</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Future Projects</h5>
+                            <ul>
+                                <li>Additional short film concepts in
+                                    development</li>
+                                <li>Feature-length script development</li>
+                                <li>Documentary project exploration</li>
+                                <li>Collaborative opportunities with other
+                                    filmmakers</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-muted">
+                            Interested in collaborating or learning more about
+                            our upcoming projects?
+                            <a href="{{ url_for('contact') }}"
+                                class="text-decoration-none">Get in touch</a>
+                            to discuss opportunities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

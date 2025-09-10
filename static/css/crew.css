@@ -1,0 +1,312 @@
+/* Crew Portal Specific Styles */
+
+.crew-portal {
+    background-color: var(--bb-dark);
+    min-height: 100vh;
+}
+
+.crew-nav {
+    background-color: rgba(26, 52, 56, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.crew-nav .navbar-brand {
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.crew-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    transition: color 0.2s ease;
+}
+
+.crew-nav .nav-link:hover {
+    color: var(--bb-accent);
+}
+
+/* Crew Dashboard Styles */
+.crew-dashboard {
+    background: linear-gradient(135deg, var(--bb-dark) 0%, #2c5f63 100%);
+}
+
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Call Sheet Styles */
+.call-sheet-card {
+    border-left: 4px solid var(--bb-primary);
+    transition: all 0.2s ease;
+}
+
+.call-sheet-card:hover {
+    border-left-color: var(--bb-accent);
+    transform: translateX(5px);
+}
+
+.call-sheet-header {
+    background: linear-gradient(90deg, var(--bb-primary) 0%, var(--bb-secondary) 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+}
+
+.call-sheet-header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--bb-secondary);
+}
+
+/* Emergency Contact Styles */
+.emergency-contact {
+    border-left: 4px solid #dc3545;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    background: rgba(220, 53, 69, 0.05);
+    border-radius: 0 8px 8px 0;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.emergency-contact:hover {
+    background: rgba(220, 53, 69, 0.1);
+    transform: translateX(5px);
+}
+
+.emergency-contact strong {
+    color: #dc3545;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.emergency-contact small {
+    color: #6c757d;
+}
+
+/* Weather Widget Styles */
+.weather-widget {
+    background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
+    color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.weather-widget .fs-4 {
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Quick Action Buttons */
+.quick-action-btn {
+    background: linear-gradient(135deg, var(--bb-primary) 0%, var(--bb-dark) 100%);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.quick-action-btn:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(44, 95, 99, 0.3);
+}
+
+/* File Upload Styles */
+.file-drop-zone {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.file-drop-zone:hover,
+.file-drop-zone.drag-over {
+    border-color: var(--bb-primary);
+    background-color: rgba(44, 95, 99, 0.05);
+}
+
+.file-drop-zone .upload-icon {
+    font-size: 3rem;
+    color: #dee2e6;
+    margin-bottom: 1rem;
+}
+
+.file-drop-zone:hover .upload-icon {
+    color: var(--bb-primary);
+}
+
+/* Touch Interactions */
+.touch-active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .crew-nav .navbar-nav {
+        background: rgba(26, 52, 56, 0.98);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+
+    .dashboard-card {
+        margin-bottom: 1rem;
+    }
+
+    .call-sheet-header {
+        padding: 1rem;
+    }
+
+    .emergency-contact {
+        padding: 0.5rem 0.75rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .quick-action-btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid var(--bb-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Update Animations */
+.updated {
+    animation: updatePulse 1s ease-in-out;
+}
+
+@keyframes updatePulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Notification Styles */
+.crew-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 300px;
+    max-width: 500px;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Status Badges */
+.status-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.today {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.status-badge.tomorrow {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+.status-badge.upcoming {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+/* Crew-specific utility classes */
+.text-crew-primary {
+    color: var(--bb-primary) !important;
+}
+
+.bg-crew-primary {
+    background-color: var(--bb-primary) !important;
+}
+
+.border-crew-primary {
+    border-color: var(--bb-primary) !important;
+}
+
+/* Dark mode adjustments for crew portal */
+.crew-portal .card {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #333;
+}
+
+.crew-portal .text-muted {
+    color: #6c757d !important;
+}
+
+.crew-portal .text-white {
+    color: white !important;
+}
+
+.crew-portal .text-light {
+    color: rgba(255, 255, 255, 0.8) !important;
+}

@@ -1,0 +1,156 @@
+{% extends "crew_base.html" %}
+
+{% block title %}Schedule - Crew Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="text-white">Production Schedule</h1>
+            <p class="text-light">Master production calendar and timeline</p>
+        </div>
+    </div>
+
+    {% if call_sheets %}
+    <div class="row">
+        {% for sheet in call_sheets %}
+        <div class="col-lg-6 mb-4">
+            <div class="card schedule-card"
+                data-call-sheet="{{ sheet.date.isoformat() }}">
+                <div
+                    class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ sheet.title }}</h5>
+                    <div>
+                        <span class="badge bg-primary">{{
+                            sheet.date.strftime('%b %d, %Y') }}</span>
+                        {% set days_diff = (sheet.date - today).days %}
+                        {% if days_diff == 0 %}
+                        <span class="badge bg-warning ms-1">TODAY</span>
+                        {% elif days_diff == 1 %}
+                        <span class="badge bg-info ms-1">TOMORROW</span>
+                        {% elif days_diff < 0 %}
+                        <span class="badge bg-secondary ms-1">COMPLETED</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Schedule</h6>
+                            <p class="mb-1"><strong>Date:</strong> {{
+                                sheet.date.strftime('%A, %B %d, %Y') }}</p>
+                            <p class="mb-1"><strong>Call Time:</strong> {{
+                                sheet.call_time }}</p>
+                            <p class="mb-1"><strong>Wrap Time:</strong> {{
+                                sheet.wrap_time }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Location</h6>
+                            <p class="mb-1"><strong>Venue:</strong> {{
+                                sheet.location }}</p>
+                            {% if sheet.weather_contingency %}
+                            <p class="mb-1"><strong>Weather Plan:</strong> {{
+                                sheet.weather_contingency }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% if sheet.scenes %}
+                    <div class="mt-3">
+                        <h6>Scenes</h6>
+                        <p class="small">{{ sheet.scenes }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if sheet.special_notes %}
+                    <div class="alert alert-warning mt-3 py-2">
+                        <small><strong>Note:</strong> {{ sheet.special_notes
+                            }}</small>
+                    </div>
+                    {% endif %}
+
+                    <div class="mt-3">
+                        <a
+                            href="{{ url_for('crew_callsheet_detail', sheet_id=sheet.id) }}"
+                            class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <h4>No Schedule Available</h4>
+                    <p class="text-muted">Production schedule will appear here
+                        once call sheets are created.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Quick Actions -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Quick Actions</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ url_for('crew_callsheets') }}"
+                                class="btn btn-outline-primary w-100">View All
+                                Call Sheets</a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ url_for('crew_contacts') }}"
+                                class="btn btn-outline-primary w-100">Contact
+                                Directory</a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ url_for('crew_scripts') }}"
+                                class="btn btn-outline-primary w-100">Scripts &
+                                Sides</a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{{ url_for('crew_documents') }}"
+                                class="btn btn-outline-primary w-100">All
+                                Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Add today's date for comparison
+const today = new Date();
+document.addEventListener('DOMContentLoaded', function() {
+    // Add visual indicators for schedule urgency
+    const scheduleCards = document.querySelectorAll('.schedule-card');
+    scheduleCards.forEach(card => {
+        const dateStr = card.dataset.callSheet;
+        const cardDate = new Date(dateStr);
+        const diffTime = cardDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 0) {
+            card.classList.add('border-warning');
+        } else if (diffDays === 1) {
+            card.classList.add('border-info');
+        } else if (diffDays < 0) {
+            card.classList.add('border-secondary');
+        }
+    });
+});
+</script>
+{% endblock %}

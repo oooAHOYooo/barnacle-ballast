@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - Barnacle Ballast Inc.{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4 text-center mb-5">Contact Us</h1>
+            <p class="lead text-center mb-5">
+                Get in touch for press inquiries, collaboration opportunities,
+                or general information.
+            </p>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Send a Message</h3>
+                            <form method="POST">
+                                {{ form.hidden_tag() }}
+
+                                <div class="mb-3">
+                                    {{ form.name.label(class="form-label") }}
+                                    {{ form.name(class="form-control") }}
+                                    {% if form.name.errors %}
+                                    <div class="text-danger small">
+                                        {% for error in form.name.errors %}
+                                        <div>{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="mb-3">
+                                    {{ form.email.label(class="form-label") }}
+                                    {{ form.email(class="form-control") }}
+                                    {% if form.email.errors %}
+                                    <div class="text-danger small">
+                                        {% for error in form.email.errors %}
+                                        <div>{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="mb-3">
+                                    {{ form.subject.label(class="form-label") }}
+                                    {{ form.subject(class="form-control") }}
+                                    {% if form.subject.errors %}
+                                    <div class="text-danger small">
+                                        {% for error in form.subject.errors %}
+                                        <div>{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="mb-3">
+                                    {{ form.message.label(class="form-label") }}
+                                    {{ form.message(class="form-control",
+                                    rows="5") }}
+                                    {% if form.message.errors %}
+                                    <div class="text-danger small">
+                                        {% for error in form.message.errors %}
+                                        <div>{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="d-grid">
+                                    {{ form.submit(class="btn btn-primary") }}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Contact Information</h3>
+
+                            <div class="mb-4">
+                                <h5>Press Inquiries</h5>
+                                <p class="mb-1">
+                                    <strong>Email:</strong>
+                                    press@barnacleballast.com<br>
+                                    <strong>Phone:</strong> (555) 123-4567
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h5>General Information</h5>
+                                <p class="mb-1">
+                                    <strong>Email:</strong>
+                                    info@barnacleballast.com<br>
+                                    <strong>Location:</strong> Independent
+                                    Production
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h5>Collaboration</h5>
+                                <p class="mb-1">
+                                    <strong>Email:</strong>
+                                    collaborate@barnacleballast.com<br>
+                                    <strong>Focus:</strong> Creative
+                                    partnerships
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h5>Location Scouting</h5>
+                                <p class="mb-1">
+                                    <strong>Email:</strong>
+                                    locations@barnacleballast.com<br>
+                                    <strong>Focus:</strong> Rural settings,
+                                    unique locations
+                                </p>
+                            </div>
+
+                            <div class="mt-4">
+                                <h5>Follow Our Progress</h5>
+                                <p class="small text-muted">
+                                    Stay updated on our production progress and
+                                    behind-the-scenes content.
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ url_for('blog') }}"
+                                        class="btn btn-outline-primary btn-sm">Production
+                                        Blog</a>
+                                    <a href="{{ url_for('projects') }}"
+                                        class="btn btn-outline-primary btn-sm">Current
+                                        Projects</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="row mt-5">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">About Our Process</h3>
+                            <p>
+                                Barnacle Ballast Inc. is committed to
+                                transparent, collaborative filmmaking.
+                                We welcome inquiries from press, potential
+                                collaborators, and anyone interested
+                                in learning more about independent film
+                                production.
+                            </p>
+                            <p>
+                                Our current focus is on
+                                "Creatures in the Tall Grass," an intimate
+                                character
+                                study that explores family dynamics in a rural
+                                setting. We're always interested
+                                in hearing from talented individuals who share
+                                our passion for authentic storytelling.
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>What We're Looking For</h5>
+                                    <ul>
+                                        <li>Creative collaborators</li>
+                                        <li>Unique filming locations</li>
+                                        <li>Technical expertise</li>
+                                        <li>Distribution opportunities</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Response Time</h5>
+                                    <ul>
+                                        <li>Press inquiries: 24-48 hours</li>
+                                        <li>General questions: 2-3 days</li>
+                                        <li>Collaboration proposals: 1 week</li>
+                                        <li>Location submissions: 1 week</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

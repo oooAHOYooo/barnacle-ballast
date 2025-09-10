@@ -1,0 +1,162 @@
+{% extends "crew_base.html" %}
+
+{% block title %}Gallery - Crew Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="text-white">Photo Gallery</h1>
+            <p class="text-light">Behind-the-scenes photos and production
+                images</p>
+        </div>
+    </div>
+
+    {% if photos %}
+    <div class="photo-grid">
+        {% for photo in photos %}
+        <div class="photo-item">
+            <img src="{{ url_for('static', filename=photo.filepath) }}"
+                alt="{{ photo.title }}" class="img-fluid">
+            <div class="photo-overlay">
+                <h6>{{ photo.title }}</h6>
+                <p class="small">{{ photo.created_at.strftime('%B %d, %Y')
+                    }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <h4>No Photos Available</h4>
+                    <p class="text-muted">Photos will appear here once they're
+                        uploaded.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Upload Section -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Upload Photos</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data"
+                        action="/upload">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Photo
+                                        Title</label>
+                                    <input type="text" class="form-control"
+                                        name="title"
+                                        placeholder="e.g., Behind the Scenes - Day 1"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="type"
+                                        class="form-label">Type</label>
+                                    <select class="form-select" name="type"
+                                        required>
+                                        <option value="photo">Photo</option>
+                                        <option value="dailies">Dailies</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Photo
+                                Files</label>
+                            <input type="file" class="form-control" name="file"
+                                accept=".jpg,.jpeg,.png,.gif" multiple required>
+                            <div class="form-text">You can select multiple
+                                photos at once.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description"
+                                class="form-label">Description</label>
+                            <textarea class="form-control" name="description"
+                                rows="3"
+                                placeholder="Photo description, location, cast/crew names..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload
+                            Photos</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.photo-item {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover {
+    transform: scale(1.02);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.05);
+}
+
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover .photo-overlay {
+    transform: translateY(0);
+}
+
+.photo-overlay h6 {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.photo-overlay p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+</style>
+{% endblock %}

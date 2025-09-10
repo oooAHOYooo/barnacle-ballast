@@ -1,0 +1,110 @@
+{% extends "crew_base.html" %}
+
+{% block title %}Dailies - Crew Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="text-white">Dailies</h1>
+            <p class="text-light">Daily footage review and production notes</p>
+        </div>
+    </div>
+
+    {% if dailies %}
+    <div class="row">
+        {% for daily in dailies %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ daily.title }}</h5>
+                    <p class="card-text small text-muted">
+                        Uploaded: {{
+                        daily.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+                    </p>
+                    {% if daily.description %}
+                    <p class="card-text small">{{ daily.description }}</p>
+                    {% endif %}
+                    <div class="d-flex gap-2">
+                        <a
+                            href="{{ url_for('static', filename=daily.filepath) }}"
+                            class="btn btn-primary btn-sm" download>Download</a>
+                        <span class="badge bg-info">{{
+                            daily.document_type.title() }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <h4>No Dailies Available</h4>
+                    <p class="text-muted">Daily footage will appear here once
+                        it's uploaded.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Upload Section -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Upload Dailies</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data"
+                        action="/upload">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="title"
+                                        class="form-label">Title</label>
+                                    <input type="text" class="form-control"
+                                        name="title"
+                                        placeholder="e.g., Day 1 Dailies - Scene 1"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="type"
+                                        class="form-label">Type</label>
+                                    <select class="form-select" name="type"
+                                        required>
+                                        <option value="dailies">Dailies</option>
+                                        <option value="photo">Photo</option>
+                                        <option
+                                            value="document">Document</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">File</label>
+                            <input type="file" class="form-control" name="file"
+                                accept=".mp4,.mov,.avi,.jpg,.jpeg,.png,.pdf"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description"
+                                class="form-label">Description</label>
+                            <textarea class="form-control" name="description"
+                                rows="3"
+                                placeholder="Scene notes, technical details, director's comments..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload
+                            Dailies</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Crew Login - Barnacle Ballast Inc.{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow">
+                <div class="card-header text-center bg-primary text-white">
+                    <h4 class="mb-0">🦀 Crew Portal Login</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-3">
+                            {{ form.password.label(class="form-label") }}
+                            {{ form.password(class="form-control") }}
+                            {% if form.password.errors %}
+                            <div class="text-danger small">
+                                {% for error in form.password.errors %}
+                                <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-grid">
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <small class="text-muted">
+                            <a href="{{ url_for('index') }}"
+                                class="text-decoration-none">← Back to Public
+                                Site</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Production Status</h6>
+                        <p
+                            class="card-text small mb-1"><strong>Project:</strong>
+                            Creatures in the Tall Grass</p>
+                        <p class="card-text small mb-1"><strong>Phase:</strong>
+                            Equipment Testing</p>
+                        <p class="card-text small mb-0"><strong>Next
+                                Shoot:</strong> September 21, 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

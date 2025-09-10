@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Barnacle Ballast Inc.{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-4 text-shadow">
+                    Currently in Production
+                </h1>
+                <h2 class="h3 mb-4">"Creatures in the Tall Grass"</h2>
+                <p class="lead mb-4">
+                    An intimate character study exploring the complex
+                    relationship between a father and son
+                    as they navigate the challenges of rural life and family
+                    dynamics.
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="{{ url_for('projects') }}"
+                        class="btn btn-outline-light btn-lg">View Project</a>
+                    <a href="{{ url_for('blog') }}"
+                        class="btn btn-light btn-lg">Production Blog</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="text-center">
+                    <div class="badge badge-production fs-5 mb-3">Equipment Test
+                        Shoot</div>
+                    <div class="fs-4 mb-2">September 21, 2025</div>
+                    <div class="fs-6">Bole's Residency</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Production Status -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 text-center mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Current Phase</h5>
+                        <p class="card-text">Equipment Testing & Character
+                            Chemistry</p>
+                        <span class="badge bg-primary">In Progress</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Next Shoot</h5>
+                        <p class="card-text">September 21, 2025</p>
+                        <div id="countdown"
+                            class="text-primary fw-bold">Loading...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Location</h5>
+                        <p class="card-text">Bole's Residency</p>
+                        <span class="badge bg-secondary">Rural Setting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest Blog Posts -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2 class="mb-4">Latest from Production</h2>
+                {% if posts %}
+                {% for post in posts %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a
+                                href="{{ url_for('blog_post', post_id=post.id) }}"
+                                class="text-decoration-none">
+                                {{ post.title }}
+                            </a>
+                        </h5>
+                        <p class="card-text text-muted">
+                            <small>{{ post.created_at.strftime('%B %d, %Y')
+                                }}</small>
+                        </p>
+                        <p class="card-text">{{ post.excerpt or
+                            post.content[:200] + '...' }}</p>
+                        <a href="{{ url_for('blog_post', post_id=post.id) }}"
+                            class="btn btn-outline-primary">Read More</a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="text-center py-5">
+                    <h4>Production Blog Coming Soon</h4>
+                    <p class="text-muted">Behind-the-scenes content will be
+                        posted here during production.</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Production Updates</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="weather-widget p-3 mb-3">
+                            <h6 class="text-white">Weather for Next Shoot</h6>
+                            <div id="weather-info">Loading weather...</div>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Quick Links</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="{{ url_for('crew_login') }}"
+                                        class="text-decoration-none">Crew
+                                        Portal</a></li>
+                                <li><a href="{{ url_for('contact') }}"
+                                        class="text-decoration-none">Contact
+                                        Production</a></li>
+                                <li><a href="{{ url_for('projects') }}"
+                                        class="text-decoration-none">View All
+                                        Projects</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Signup -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <h3 class="mb-3">Stay Updated</h3>
+                <p class="mb-4">Get the latest production updates and
+                    behind-the-scenes content delivered to your inbox.</p>
+                <form class="d-flex gap-2">
+                    <input type="email" class="form-control"
+                        placeholder="Enter your email">
+                    <button type="submit"
+                        class="btn btn-light">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Countdown timer
+function updateCountdown() {
+    fetch('/api/countdown')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('countdown').textContent = data.countdown;
+        })
+        .catch(error => {
+            document.getElementById('countdown').textContent = 'Error loading countdown';
+        });
+}
+
+// Weather info
+function updateWeather() {
+    fetch('/api/weather')
+        .then(response => response.json())
+        .then(data => {
+            const weatherHtml = `
+                <div class="text-white">
+                    <div class="fs-4">${data.temperature}</div>
+                    <div class="small">${data.condition}</div>
+                    <div class="small">${data.forecast}</div>
+                </div>
+            `;
+            document.getElementById('weather-info').innerHTML = weatherHtml;
+        })
+        .catch(error => {
+            document.getElementById('weather-info').innerHTML = 'Weather unavailable';
+        });
+}
+
+// Update on page load
+updateCountdown();
+updateWeather();
+
+// Update every minute
+setInterval(updateCountdown, 60000);
+setInterval(updateWeather, 300000);
+</script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "crew_base.html" %}
+
+{% block title %}Call Sheets - Crew Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="text-white">Call Sheets</h1>
+            <p class="text-light">Production schedules and call information</p>
+        </div>
+    </div>
+
+    {% if call_sheets %}
+    <div class="row">
+        {% for sheet in call_sheets %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div
+                    class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">{{ sheet.title }}</h6>
+                    <span class="badge bg-primary">{{
+                        sheet.date.strftime('%b %d') }}</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <strong>Date:</strong> {{
+                        sheet.date.strftime('%B %d, %Y') }}<br>
+                        <strong>Location:</strong> {{ sheet.location }}<br>
+                        <strong>Call Time:</strong> {{ sheet.call_time }}<br>
+                        <strong>Wrap Time:</strong> {{ sheet.wrap_time }}
+                    </p>
+                    {% if sheet.special_notes %}
+                    <div class="alert alert-info py-2">
+                        <small><strong>Note:</strong> {{
+                            sheet.special_notes[:100] }}{% if
+                            sheet.special_notes|length > 100 %}...{% endif
+                            %}</small>
+                    </div>
+                    {% endif %}
+                    <a
+                        href="{{ url_for('crew_callsheet_detail', sheet_id=sheet.id) }}"
+                        class="btn btn-primary btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <h4>No Call Sheets Available</h4>
+                    <p class="text-muted">Call sheets will appear here once
+                        they're created.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

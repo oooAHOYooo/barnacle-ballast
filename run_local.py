@@ -41,20 +41,40 @@ def setup_environment():
         print("Run: pip install -r requirements.txt")
         sys.exit(1)
 
+def find_available_port(start_port=5000, max_attempts=10):
+    """Find an available port starting from start_port"""
+    import socket
+    
+    for port in range(start_port, start_port + max_attempts):
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.bind(('0.0.0.0', port))
+                return port
+        except OSError:
+            continue
+    return None
+
 def main():
-    print("🦀 Barnacle Ballast Inc. - Local Setup")
+    print("🦀 BARNACLE - Local Setup")
     print("=" * 40)
     
     setup_environment()
     
+    # Find available port
+    port = find_available_port(5000, 20)
+    
     print("\n🎬 Ready for production!")
     print("\nNext steps:")
     print("1. Run: python app.py")
-    print("2. Visit: http://localhost:5000")
-    print("3. Crew Portal: http://localhost:5000/crew")
-    print("   Username: ACTORVIEW")
+    if port:
+        print(f"2. Visit: http://localhost:{port}")
+        print(f"3. Crew Portal: http://localhost:{port}/crew/login")
+    else:
+        print("2. Visit: http://localhost:5000 (or next available port)")
+        print("3. Crew Portal: http://localhost:5000/crew/login")
     print("   Password: STUDIO!@#")
     print("\n📅 September 21st call sheet is pre-loaded!")
+    print("\n🔧 The app will automatically find an available port!")
 
 if __name__ == '__main__':
     main()

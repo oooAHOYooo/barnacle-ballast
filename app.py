@@ -374,9 +374,32 @@ def create_tables():
             db.session.add(call_sheet)
             db.session.commit()
 
+def find_available_port(start_port=5000, max_attempts=10):
+    """Find an available port starting from start_port"""
+    import socket
+    
+    for port in range(start_port, start_port + max_attempts):
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.bind(('0.0.0.0', port))
+                return port
+        except OSError:
+            continue
+    return None
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
         # Create initial call sheet for September 21st
         create_tables()
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    
+    # Try to find an available port
+    port = find_available_port(5000, 20)  # Try ports 5000-5019
+    if port:
+        print(f"🚀 Starting BARNACLE on port {port}")
+        print(f"🌐 Access at: http://localhost:{port}")
+        print(f"🔑 Crew Portal: http://localhost:{port}/crew/login")
+        app.run(debug=True, host='0.0.0.0', port=port)
+    else:
+        print("❌ No available ports found. Please free up a port and try again.")
+        exit(1)

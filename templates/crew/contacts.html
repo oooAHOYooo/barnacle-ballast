@@ -6,7 +6,7 @@
 <div class="container mt-4">
     <div class="row mb-4">
         <div class="col">
-            <h1 class="text-white">Contact Directory</h1>
+            <h1 class="text-black">Contact Directory</h1>
             <p class="text-light">Cast, crew, and vendor contact information</p>
         </div>
     </div>
@@ -19,13 +19,12 @@
                 <div class="col-md-6 col-lg-3 mb-3">
                     <div class="card emergency-contact-card">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-danger">Mac (Father)</h5>
-                            <p class="card-text">Cast - Father</p>
+                            <h5 class="card-title text-danger">Alex
+                                Gonzalez</h5>
+                            <p class="card-text">Director</p>
                             <div class="d-flex gap-2 justify-content-center">
-                                <a href="tel:5551234567"
-                                    class="btn btn-outline-danger btn-sm">Call</a>
-                                <a href="sms:5551234567"
-                                    class="btn btn-outline-danger btn-sm">SMS</a>
+                                <a href="mailto:alex@ahoy.ooo"
+                                    class="btn btn-outline-danger btn-sm">Email</a>
                             </div>
                         </div>
                     </div>
@@ -33,13 +32,12 @@
                 <div class="col-md-6 col-lg-3 mb-3">
                     <div class="card emergency-contact-card">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-danger">Dallas (Son)</h5>
-                            <p class="card-text">Cast - Son</p>
+                            <h5 class="card-title text-danger">Dallas
+                                DeMartini</h5>
+                            <p class="card-text">Actor</p>
                             <div class="d-flex gap-2 justify-content-center">
-                                <a href="tel:5552345678"
-                                    class="btn btn-outline-danger btn-sm">Call</a>
-                                <a href="sms:5552345678"
-                                    class="btn btn-outline-danger btn-sm">SMS</a>
+                                <a href="mailto:dallas@ahoy.ooo"
+                                    class="btn btn-outline-danger btn-sm">Email</a>
                             </div>
                         </div>
                     </div>
@@ -47,13 +45,11 @@
                 <div class="col-md-6 col-lg-3 mb-3">
                     <div class="card emergency-contact-card">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-danger">Director</h5>
-                            <p class="card-text">Production</p>
+                            <h5 class="card-title text-danger">Ellen M</h5>
+                            <p class="card-text">Camera Operator</p>
                             <div class="d-flex gap-2 justify-content-center">
-                                <a href="tel:5553456789"
-                                    class="btn btn-outline-danger btn-sm">Call</a>
-                                <a href="sms:5553456789"
-                                    class="btn btn-outline-danger btn-sm">SMS</a>
+                                <a href="mailto:ellen@ahoy.ooo"
+                                    class="btn btn-outline-danger btn-sm">Email</a>
                             </div>
                         </div>
                     </div>
@@ -61,14 +57,11 @@
                 <div class="col-md-6 col-lg-3 mb-3">
                     <div class="card emergency-contact-card">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-danger">Production
-                                Office</h5>
-                            <p class="card-text">General</p>
+                            <h5 class="card-title text-danger">Chris B</h5>
+                            <p class="card-text">Crew</p>
                             <div class="d-flex gap-2 justify-content-center">
-                                <a href="tel:5554567890"
-                                    class="btn btn-outline-danger btn-sm">Call</a>
-                                <a href="sms:5554567890"
-                                    class="btn btn-outline-danger btn-sm">SMS</a>
+                                <a href="#"
+                                    class="btn btn-outline-danger btn-sm disabled">Contact</a>
                             </div>
                         </div>
                     </div>
@@ -133,103 +126,6 @@
         </div>
     </div>
 
-    <!-- Add Contact Form -->
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="mb-0">Add New Contact</h4>
-                </div>
-                <div class="card-body">
-                    <form method="POST">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="name"
-                                        class="form-label">Name</label>
-                                    <input type="text" class="form-control"
-                                        name="name" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="role"
-                                        class="form-label">Role/Position</label>
-                                    <input type="text" class="form-control"
-                                        name="role" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="phone"
-                                        class="form-label">Phone</label>
-                                    <input type="tel" class="form-control"
-                                        name="phone">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="email"
-                                        class="form-label">Email</label>
-                                    <input type="email" class="form-control"
-                                        name="email">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="department"
-                                        class="form-label">Department</label>
-                                    <select class="form-select"
-                                        name="department">
-                                        <option value>Select Department</option>
-                                        <option value="cast">Cast</option>
-                                        <option value="camera">Camera</option>
-                                        <option value="sound">Sound</option>
-                                        <option
-                                            value="production">Production</option>
-                                        <option value="art">Art
-                                            Department</option>
-                                        <option value="costume">Costume</option>
-                                        <option value="makeup">Makeup</option>
-                                        <option
-                                            value="transportation">Transportation</option>
-                                        <option
-                                            value="catering">Catering</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <div class="form-check mt-4">
-                                        <input class="form-check-input"
-                                            type="checkbox"
-                                            name="emergency_contact"
-                                            id="emergency_contact">
-                                        <label class="form-check-label"
-                                            for="emergency_contact">
-                                            Emergency Contact
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="notes" class="form-label">Notes</label>
-                            <textarea class="form-control" name="notes"
-                                rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add
-                            Contact</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock %}
 

@@ -154,15 +154,10 @@ def blog_post(post_id):
     post = BlogPost.query.get_or_404(post_id)
     return render_template('public/post.html', post=post)
 
-@app.route('/contact', methods=['GET', 'POST'])
+@app.route('/contact')
 def contact():
-    """Contact form page"""
-    form = ContactForm()
-    if form.validate_on_submit():
-        # Here you would typically save to database or send email
-        flash('Thank you for your message! We\'ll get back to you soon.', 'success')
-        return redirect(url_for('contact'))
-    return render_template('public/contact.html', form=form)
+    """Contact page"""
+    return render_template('public/contact.html')
 
 # Crew Portal Routes
 @app.route('/crew/login', methods=['GET', 'POST'])
@@ -200,6 +195,12 @@ def crew_dashboard():
     today = datetime.now().date()
     todays_call_sheet = CallSheet.query.filter_by(date=today).first()
     
+    # Get upcoming call sheets (next 7 days)
+    upcoming_call_sheets = CallSheet.query.filter(
+        CallSheet.date > today,
+        CallSheet.date <= today + timedelta(days=7)
+    ).order_by(CallSheet.date).all()
+    
     # Get weather data
     weather = get_weather_data()
     
@@ -207,7 +208,8 @@ def crew_dashboard():
     recent_posts = BlogPost.query.filter_by(published=True).order_by(BlogPost.created_at.desc()).limit(3).all()
     
     return render_template('crew/dashboard.html', 
-                         call_sheet=todays_call_sheet, 
+                         call_sheet=todays_call_sheet,
+                         upcoming_call_sheets=upcoming_call_sheets,
                          weather=weather,
                          posts=recent_posts)
 
@@ -327,38 +329,6 @@ def api_countdown():
         })
     return jsonify({'countdown': 'No upcoming shoots'})
 
-# File upload handling
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    """Handle file uploads"""
-    if not session.get('crew_logged_in'):
-        return jsonify({'error': 'Unauthorized'}), 401
-    
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file provided'}), 400
-    
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({'error': 'No file selected'}), 400
-    
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
-        
-        # Create document record
-        doc = Document(
-            filename=filename,
-            filepath=filepath,
-            document_type=request.form.get('type', 'document'),
-            title=request.form.get('title', filename)
-        )
-        db.session.add(doc)
-        db.session.commit()
-        
-        return jsonify({'success': True, 'filename': filename})
-    
-    return jsonify({'error': 'Invalid file type'}), 400
 
 # Error handlers
 @app.route('/favicon.ico')

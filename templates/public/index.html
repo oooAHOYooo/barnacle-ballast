@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Barnacle{% endblock %}
+{% block title %}Barnacle Ballast - Independent Film Production | Creatures in
+the Tall Grass{% endblock %}
+{% block description %}Independent film production company producing
+character-driven narratives. Currently filming 'Creatures in the Tall Grass' - a
+rural family drama exploring father-son relationships.{% endblock %}
+{% block keywords %}independent film production, rural drama, character-driven
+film, father son relationship, family dynamics, filmmaking, Barnacle Ballast{%
+endblock %}
 
 {% block content %}
 <!-- Hero Section -->
@@ -8,12 +15,13 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <h1 class="display-4 fw-bold mb-4 text-shadow">
-                    BARNACLE
+                <h1 class="display-4 fw-bold mb-4 text-shadow text-black">
+                    BARNACLE BALLAST
                 </h1>
                 <h2 class="h3 mb-4">"Creatures in the Tall Grass"</h2>
                 <p class="lead mb-4">
-                    Stories surface when you're not looking.
+                    Independent film production creating character-driven
+                    narratives that explore human relationships.
                 </p>
                 <div class="d-flex gap-3">
                     <a href="{{ url_for('crew_login') }}"
@@ -73,7 +81,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <h2 class="mb-4">Production Notes</h2>
+                <h2 class="mb-4">Film Production Updates</h2>
                 {% if posts %}
                 {% for post in posts %}
                 <div class="card mb-4">
@@ -98,8 +106,10 @@
                 {% endfor %}
                 {% else %}
                 <div class="text-center py-5">
-                    <h4>Stories Surface When You're Not Looking</h4>
-                    <p class="text-muted">Production updates will appear here as the project develops.</p>
+                    <h4>Independent Film Production in Progress</h4>
+                    <p class="text-muted">Follow our journey creating
+                        'Creatures in the Tall Grass' - a rural family drama
+                        exploring father-son relationships.</p>
                 </div>
                 {% endif %}
             </div>
@@ -120,8 +130,10 @@
                                         class="text-decoration-none">Contact</a></li>
                                 <li><a href="{{ url_for('about') }}"
                                         class="text-decoration-none">About</a></li>
-                                <li><small class="text-muted"><a href="{{ url_for('crew_login') }}"
-                                        class="text-decoration-none">Crew Access</a></small></li>
+                                <li><small class="text-muted"><a
+                                            href="{{ url_for('crew_login') }}"
+                                            class="text-decoration-none">Crew
+                                            Access</a></small></li>
                             </ul>
                         </div>
                     </div>
@@ -136,14 +148,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h3 class="mb-3">BARNACLE</h3>
-                <p class="mb-4">Production portal for cast and crew.</p>
+                <h3 class="mb-3">BARNACLE BALLAST</h3>
+                <p class="mb-4">Independent film production portal for cast and
+                    crew.</p>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <div class="card bg-dark text-white">
                             <div class="card-body">
                                 <h5>CAST & CREW</h5>
-                                <p class="small">Mac, Dallas, and production team</p>
+                                <p class="small">Mac, Dallas, and production
+                                    team</p>
                             </div>
                         </div>
                     </div>
@@ -151,13 +165,15 @@
                         <div class="card bg-dark text-white">
                             <div class="card-body">
                                 <h5>PRODUCTION INFO</h5>
-                                <p class="small">Call sheets, scripts, contacts</p>
+                                <p class="small">Call sheets, scripts,
+                                    contacts</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="mt-4">
-                    <a href="{{ url_for('crew_login') }}" class="btn btn-light btn-lg">ACCESS BARNACLE</a>
+                    <a href="{{ url_for('crew_login') }}"
+                        class="btn btn-light btn-lg">ACCESS BARNACLE</a>
                     <p class="fs-4 mt-3 mb-0"><strong>STUDIO!@#</strong></p>
                     <p class="small">Production Password</p>
                 </div>
@@ -168,6 +184,26 @@
 {% endblock %}
 
 {% block extra_js %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    "name": "Creatures in the Tall Grass",
+    "description": "A father. A son. A marsh that remembers everything. Rural family drama exploring complex relationships.",
+    "genre": "Drama",
+    "productionCompany": {
+        "@type": "Organization",
+        "name": "Barnacle Ballast Inc."
+    },
+    "director": {
+        "@type": "Person",
+        "name": "Independent Film Director"
+    },
+    "inLanguage": "en",
+    "dateCreated": "2025",
+    "keywords": "rural drama, family relationships, father son, independent film"
+}
+</script>
 <script>
 // Countdown timer
 function updateCountdown() {

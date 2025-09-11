@@ -7,10 +7,41 @@
     <!-- Welcome Header -->
     <div class="row mb-4">
         <div class="col">
-            <h1 class="text-white">BARNACLE</h1>
+            <h1 class="text-black">BARNACLE</h1>
             <p class="text-light">Production dashboard for cast and crew.</p>
         </div>
     </div>
+
+    <!-- Upcoming Events -->
+    {% if upcoming_call_sheets %}
+    <div class="row mb-4">
+        <div class="col">
+            <h4 class="text-white mb-3">Upcoming Events</h4>
+            <div class="row">
+                {% for call_sheet in upcoming_call_sheets %}
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">{{ call_sheet.title }}</h6>
+                            <p class="card-text small text-muted">
+                                <strong>{{ call_sheet.date.strftime('%B %d, %Y')
+                                    }}</strong><br>
+                                {{ call_sheet.location }}<br>
+                                {{ call_sheet.call_time }} - {{
+                                call_sheet.wrap_time }}
+                            </p>
+                            <a
+                                href="{{ url_for('crew_callsheet_detail', sheet_id=call_sheet.id) }}"
+                                class="btn btn-outline-primary btn-sm">View
+                                Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
     <!-- Today's Overview -->
     <div class="row mb-4">

@@ -6,7 +6,7 @@
 <div class="container mt-4">
     <div class="row mb-4">
         <div class="col">
-            <h1 class="text-white">Scripts & Sides</h1>
+            <h1 class="text-black">Scripts & Sides</h1>
             <p class="text-light">Download latest scripts, sides, and production
                 documents</p>
         </div>
@@ -108,58 +108,5 @@
         </div>
     </div>
 
-    <!-- Upload Section -->
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="mb-0">Upload New Document</h4>
-                </div>
-                <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data"
-                        action="/upload">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="title"
-                                        class="form-label">Document
-                                        Title</label>
-                                    <input type="text" class="form-control"
-                                        name="title" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="type"
-                                        class="form-label">Document Type</label>
-                                    <select class="form-select" name="type"
-                                        required>
-                                        <option value="script">Script</option>
-                                        <option value="sides">Sides</option>
-                                        <option value="document">General
-                                            Document</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="file" class="form-label">File</label>
-                            <input type="file" class="form-control" name="file"
-                                accept=".pdf,.doc,.docx,.txt" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="description"
-                                class="form-label">Description
-                                (Optional)</label>
-                            <textarea class="form-control" name="description"
-                                rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Upload
-                            Document</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock %}

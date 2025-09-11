@@ -3,14 +3,26 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Barnacle Ballast Inc.{% endblock %}</title>
+        <title>{% block title %}Barnacle Ballast Inc. - Independent Film
+            Production{% endblock %}</title>
+        <meta name="description"
+            content="{% block description %}Independent film production company creating character-driven narratives. Currently producing 'Creatures in the Tall Grass' - a rural family drama.{% endblock %}">
+        <meta name="keywords"
+            content="{% block keywords %}independent film production, character-driven narratives, rural drama, filmmaking, Barnacle Ballast, Creatures in the Tall Grass{% endblock %}">
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/svg+xml"
+            href="{{ url_for('static', filename='favicon/favicon.svg') }}">
+        <link rel="icon" type="image/x-icon"
+            href="{{ url_for('static', filename='favicon/favicon.ico') }}">
 
         <!-- Bootstrap CSS -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
             rel="stylesheet">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <!-- Custom CSS -->
         <link href="{{ url_for('static', filename='css/main.css') }}"
             rel="stylesheet">
@@ -20,14 +32,37 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap"
             rel="stylesheet">
+
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Barnacle Ballast Inc.",
+            "description": "Independent film production company creating character-driven narratives",
+            "url": "{{ request.url_root }}",
+            "logo": "{{ request.url_root }}static/favicon/favicon.svg",
+            "sameAs": [],
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "(555) 123-4567",
+                "contactType": "customer service",
+                "email": "info@barnacleballast.com"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "US"
+            }
+        }
+        </script>
     </head>
     <body class="d-flex flex-column min-vh-100">
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-            <a class="navbar-brand" href="{{ url_for('crew_login') }}">
-                BARNACLE
-            </a>
+                <a class="navbar-brand" href="{{ url_for('crew_login') }}">
+                    BARNACLE
+                </a>
 
                 <button class="navbar-toggler" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarNav">

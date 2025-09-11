@@ -311,6 +311,14 @@ def crew_documents():
     documents = Document.query.order_by(Document.created_at.desc()).all()
     return render_template('crew/documents.html', documents=documents)
 
+@app.route('/crew/access')
+def crew_access():
+    """Crew access information page"""
+    if not session.get('crew_logged_in'):
+        return redirect(url_for('crew_login'))
+    
+    return render_template('crew/crew_access.html')
+
 # API Routes
 @app.route('/api/weather')
 def api_weather():

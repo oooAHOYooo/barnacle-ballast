@@ -27,6 +27,16 @@ Barnacle Films Inc.{% endblock %}
                                 scene.scene_number }}: {{ scene.title }}</h1>
                             <p class="lead text-muted">{{ scene.description
                                 }}</p>
+
+                            <!-- Work in Progress Notice -->
+                            <div class="alert alert-warning alert-sm mt-3">
+                                <i class="fas fa-tools"></i>
+                                <strong>Work in Progress:</strong> Shot details
+                                are placeholder data.
+                                Check <a href="{{ url_for('crew_dashboard') }}"
+                                    class="alert-link">morning announcements</a>
+                                for updates.
+                            </div>
                         </div>
                         <div class="text-end">
                             <div class="btn-group" role="group">
@@ -193,20 +203,24 @@ Barnacle Films Inc.{% endblock %}
                                         <tr>
                                             <td>1</td>
                                             <td>Dallas approaching car</td>
-                                            <td>Canon FD 24mm f/1.4</td>
-                                            <td>Wide shot, handheld
-                                                following</td>
-                                            <td>Handheld following</td>
+                                            <td>Canon FD 24mm f/1.4 (38mm
+                                                equivalent)</td>
+                                            <td>Wide shot showing Dallas walking
+                                                to car, suburban setting</td>
+                                            <td>Handheld, following</td>
                                             <td>Deep focus, environmental
                                                 context</td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>Dominic intercepts</td>
-                                            <td>Canon FD 50mm f/1.2</td>
-                                            <td>Medium shot</td>
+                                            <td>Canon FD 50mm f/1.2 (80mm
+                                                equivalent)</td>
+                                            <td>Medium shot Dominic appearing,
+                                                greeting Dallas</td>
                                             <td>Handheld, reactive</td>
-                                            <td>Shallow DOF, Dominic sharp</td>
+                                            <td>Shallow DOF, Dominic sharp,
+                                                background soft</td>
                                         </tr>
                                         <tr class="table-info">
                                             <td colspan="6"><strong>INT. CAR -
@@ -383,48 +397,44 @@ Barnacle Films Inc.{% endblock %}
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1A</td>
-                                            <td>Wide shot - Mac and Dallas in
-                                                conversation</td>
-                                            <td>Wide angle lens</td>
-                                            <td>Wide shot</td>
-                                            <td>Static</td>
-                                            <td>Establishing shot</td>
+                                        <tr class="table-info">
+                                            <td colspan="6"><strong>INT. COTTAGE
+                                                    KITCHEN -
+                                                    EVENING</strong></td>
                                         </tr>
                                         <tr>
-                                            <td>1B</td>
-                                            <td>Medium shot - Mac's
-                                                reaction</td>
-                                            <td>50mm lens</td>
-                                            <td>Medium shot</td>
-                                            <td>Static</td>
-                                            <td>Over Dallas' shoulder</td>
+                                            <td>1</td>
+                                            <td>Wide establishing</td>
+                                            <td>Canon FD 24mm f/1.4 (38mm
+                                                equivalent)</td>
+                                            <td>Wide shot showing cramped
+                                                kitchen, boxes, both
+                                                characters</td>
+                                            <td>Static on tripod, slightly high
+                                                angle</td>
+                                            <td>Deep focus showing the cluttered
+                                                space</td>
                                         </tr>
                                         <tr>
-                                            <td>1C</td>
-                                            <td>Medium shot - Dallas'
-                                                response</td>
-                                            <td>50mm lens</td>
-                                            <td>Medium shot</td>
-                                            <td>Static</td>
-                                            <td>Over Mac's shoulder</td>
+                                            <td>2</td>
+                                            <td>Dallas medium shot</td>
+                                            <td>Canon FD 50mm f/1.2 (80mm
+                                                equivalent)</td>
+                                            <td>Medium shot, Dallas at table
+                                                picking at food</td>
+                                            <td>Handheld, slight movement</td>
+                                            <td>Shallow DOF, background
+                                                soft</td>
                                         </tr>
                                         <tr>
-                                            <td>1D</td>
-                                            <td>Close-up - Mac's hands</td>
-                                            <td>85mm lens</td>
-                                            <td>Close-up</td>
-                                            <td>Static</td>
-                                            <td>Emotional moment</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1E</td>
-                                            <td>Two-shot - Both characters</td>
-                                            <td>35mm lens</td>
-                                            <td>Two-shot</td>
-                                            <td>Static</td>
-                                            <td>Final moment of scene</td>
+                                            <td>3</td>
+                                            <td>Mac close-up</td>
+                                            <td>Canon FD 50mm f/1.2 (80mm
+                                                equivalent)</td>
+                                            <td>Close-up Mac's face</td>
+                                            <td>Handheld, intimate</td>
+                                            <td>Shallow DOF, Mac sharp,
+                                                background very soft</td>
                                         </tr>
                                     </tbody>
                                 </table>

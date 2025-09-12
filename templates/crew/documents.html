@@ -11,6 +11,20 @@
         </div>
     </div>
 
+    <!-- Work in Progress Notice -->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="alert alert-warning">
+                <i class="fas fa-tools"></i>
+                <strong>Work in Progress:</strong> This section is under active
+                development. Most content is placeholder data.
+                Check the <a href="{{ url_for('crew_dashboard') }}"
+                    class="alert-link">morning announcements</a> for the latest
+                updates and new features.
+            </div>
+        </div>
+    </div>
+
     <!-- Filter Options -->
     <div class="row mb-4">
         <div class="col">
@@ -74,7 +88,8 @@
                             class="btn btn-primary btn-sm">
                             <i class="fas fa-eye"></i> View
                         </a>
-                        <a href="{{ url_for('download_document', doc_id=doc.id) }}"
+                        <a
+                            href="{{ url_for('download_document', doc_id=doc.id) }}"
                             class="btn btn-outline-primary btn-sm">
                             <i class="fas fa-download"></i> Download
                         </a>

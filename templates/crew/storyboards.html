@@ -11,6 +11,20 @@
         </div>
     </div>
 
+    <!-- Work in Progress Notice -->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="alert alert-warning">
+                <i class="fas fa-tools"></i>
+                <strong>Work in Progress:</strong> This section is under active
+                development. Most content is placeholder data.
+                Check the <a href="{{ url_for('crew_dashboard') }}"
+                    class="alert-link">morning announcements</a> for the latest
+                updates and new features.
+            </div>
+        </div>
+    </div>
+
     <!-- Storyboards Section -->
     <div class="row mb-5">
         <div class="col">
@@ -23,17 +37,21 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ storyboard.title }}</h5>
                             <p class="card-text small text-muted">
-                                Uploaded: {{ storyboard.created_at.strftime('%B %d, %Y') }}
+                                Uploaded: {{
+                                storyboard.created_at.strftime('%B %d, %Y') }}
                             </p>
                             {% if storyboard.description %}
-                            <p class="card-text small">{{ storyboard.description }}</p>
+                            <p class="card-text small">{{ storyboard.description
+                                }}</p>
                             {% endif %}
                             <div class="d-flex gap-2">
-                                <a href="{{ url_for('view_document', doc_id=storyboard.id) }}"
+                                <a
+                                    href="{{ url_for('view_document', doc_id=storyboard.id) }}"
                                     class="btn btn-primary btn-sm">
                                     <i class="fas fa-eye"></i> View
                                 </a>
-                                <a href="{{ url_for('download_document', doc_id=storyboard.id) }}"
+                                <a
+                                    href="{{ url_for('download_document', doc_id=storyboard.id) }}"
                                     class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-download"></i> Download
                                 </a>
@@ -48,7 +66,8 @@
             <div class="card">
                 <div class="card-body text-center py-5">
                     <h4>No Storyboards Available</h4>
-                    <p class="text-muted">Storyboards will appear here once they're uploaded.</p>
+                    <p class="text-muted">Storyboards will appear here once
+                        they're uploaded.</p>
                 </div>
             </div>
             {% endif %}
@@ -67,21 +86,25 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ ref.title }}</h5>
                             <p class="card-text small text-muted">
-                                Uploaded: {{ ref.created_at.strftime('%B %d, %Y') }}
+                                Uploaded: {{
+                                ref.created_at.strftime('%B %d, %Y') }}
                             </p>
                             {% if ref.description %}
                             <p class="card-text small">{{ ref.description }}</p>
                             {% endif %}
                             <div class="d-flex gap-2">
-                                <a href="{{ url_for('view_document', doc_id=ref.id) }}"
+                                <a
+                                    href="{{ url_for('view_document', doc_id=ref.id) }}"
                                     class="btn btn-primary btn-sm">
                                     <i class="fas fa-eye"></i> View
                                 </a>
-                                <a href="{{ url_for('download_document', doc_id=ref.id) }}"
+                                <a
+                                    href="{{ url_for('download_document', doc_id=ref.id) }}"
                                     class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-download"></i> Download
                                 </a>
-                                <span class="badge bg-secondary">{{ ref.document_type.title() }}</span>
+                                <span class="badge bg-secondary">{{
+                                    ref.document_type.title() }}</span>
                             </div>
                         </div>
                     </div>
@@ -92,7 +115,8 @@
             <div class="card">
                 <div class="card-body text-center py-5">
                     <h4>No Visual References Available</h4>
-                    <p class="text-muted">Visual references will appear here once they're uploaded.</p>
+                    <p class="text-muted">Visual references will appear here
+                        once they're uploaded.</p>
                 </div>
             </div>
             {% endif %}
@@ -107,36 +131,50 @@
                     <h4 class="mb-0">Upload New Visual Document</h4>
                 </div>
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="/upload">
+                    <form method="POST" enctype="multipart/form-data"
+                        action="/upload">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Document Title</label>
-                                    <input type="text" class="form-control" name="title" required>
+                                    <label for="title"
+                                        class="form-label">Document
+                                        Title</label>
+                                    <input type="text" class="form-control"
+                                        name="title" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="type" class="form-label">Document Type</label>
-                                    <select class="form-select" name="type" required>
-                                        <option value="document">Storyboard</option>
-                                        <option value="photo">Location Photo</option>
-                                        <option value="document">Character Reference</option>
-                                        <option value="document">Visual Reference</option>
+                                    <label for="type"
+                                        class="form-label">Document Type</label>
+                                    <select class="form-select" name="type"
+                                        required>
+                                        <option
+                                            value="document">Storyboard</option>
+                                        <option value="photo">Location
+                                            Photo</option>
+                                        <option value="document">Character
+                                            Reference</option>
+                                        <option value="document">Visual
+                                            Reference</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="file" class="form-label">File</label>
-                            <input type="file" class="form-control" name="file" 
+                            <input type="file" class="form-control" name="file"
                                 accept=".pdf,.jpg,.jpeg,.png,.gif" required>
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Description (Optional)</label>
-                            <textarea class="form-control" name="description" rows="3"></textarea>
+                            <label for="description"
+                                class="form-label">Description
+                                (Optional)</label>
+                            <textarea class="form-control" name="description"
+                                rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Upload Document</button>
+                        <button type="submit" class="btn btn-primary">Upload
+                            Document</button>
                     </form>
                 </div>
             </div>

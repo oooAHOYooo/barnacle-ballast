@@ -1,0 +1,525 @@
+{% extends "crew/crew_base.html" %}
+
+{% block title %}Scene {{ scene.scene_number }} - {{ scene.title }} - Barnacle
+Films Inc.{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col">
+            <!-- Scene Header -->
+            <div class="row mb-4">
+                <div class="col">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a
+                                    href="{{ url_for('crew_scenes') }}">Master
+                                    Scenes</a></li>
+                            <li class="breadcrumb-item active">Scene {{
+                                scene.scene_number }}</li>
+                        </ol>
+                    </nav>
+
+                    <div
+                        class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h1 class="text-black mb-2">Scene {{
+                                scene.scene_number }}: {{ scene.title }}</h1>
+                            <p class="lead text-muted">{{ scene.description
+                                }}</p>
+                        </div>
+                        <div class="text-end">
+                            <span
+                                class="badge bg-{{ 'success' if scene.status == 'completed' else 'warning' if scene.status == 'in_progress' else 'info' }} fs-6">
+                                {{ scene.status|title }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scene Details -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Basic Information -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Scene Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Location</h6>
+                                    <p>{{ scene.location }}</p>
+
+                                    <h6>Time of Day</h6>
+                                    <p>{{ scene.time_of_day }}</p>
+
+                                    <h6>Scene Type</h6>
+                                    <p>{{ scene.scene_type }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Estimated Duration</h6>
+                                    <p>{{ scene.estimated_duration }}</p>
+
+                                    <h6>Shot Count</h6>
+                                    <p>{{ scene.shot_count if scene.shot_count >
+                                        0 else 'Not specified' }}</p>
+
+                                    <h6>Status</h6>
+                                    <p>{{ scene.status|title }}</p>
+                                </div>
+                            </div>
+
+                            {% if scene.characters %}
+                            <div class="mt-3">
+                                <h6>Characters</h6>
+                                <p>{{ scene.characters }}</p>
+                            </div>
+                            {% endif %}
+
+                            {% if scene.notes %}
+                            <div class="mt-3">
+                                <h6>Notes</h6>
+                                <p>{{ scene.notes }}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Shot List (if available) -->
+                    {% if scene.shot_count > 0 %}
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Shot List</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if scene.scene_number == 12 %}
+                            <!-- Dominic Car Scene Shot List -->
+                            <div class="alert alert-info">
+                                <i class="fas fa-video"></i>
+                                <strong>Camera:</strong> RED KOMODO 6K |
+                                <strong>Lenses:</strong> Vintage Canon FD Lenses
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Shot #</th>
+                                            <th>Description</th>
+                                            <th>Lens</th>
+                                            <th>Framing</th>
+                                            <th>Movement</th>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-info">
+                                            <td colspan="6"><strong>EXT.
+                                                    NEIGHBORHOOD -
+                                                    DAY</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Dallas approaching car</td>
+                                            <td>Canon FD 24mm f/1.4</td>
+                                            <td>Wide shot, handheld
+                                                following</td>
+                                            <td>Handheld following</td>
+                                            <td>Deep focus, environmental
+                                                context</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Dominic intercepts</td>
+                                            <td>Canon FD 50mm f/1.2</td>
+                                            <td>Medium shot</td>
+                                            <td>Handheld, reactive</td>
+                                            <td>Shallow DOF, Dominic sharp</td>
+                                        </tr>
+                                        <tr class="table-info">
+                                            <td colspan="6"><strong>INT. CAR -
+                                                    CONTINUOUS</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Dallas hiding papers</td>
+                                            <td>Canon FD 85mm f/1.8</td>
+                                            <td>Close-up hands</td>
+                                            <td>Handheld, intimate</td>
+                                            <td>Sharp on papers, face soft</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Dominic climbing in</td>
+                                            <td>Canon FD 50mm f/1.2</td>
+                                            <td>Medium shot through
+                                                windshield</td>
+                                            <td>Static, observational</td>
+                                            <td>Through glass, slightly
+                                                soft</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>Two-shot raccoon discussion</td>
+                                            <td>Canon FD 35mm f/2</td>
+                                            <td>Two-shot in car</td>
+                                            <td>Static, dashboard mounted</td>
+                                            <td>Both in focus, background
+                                                soft</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>Weather device detail</td>
+                                            <td>Canon FD 85mm f/1.8</td>
+                                            <td>Close-up device</td>
+                                            <td>Static, detailed</td>
+                                            <td>Sharp on device, wires and
+                                                sensors</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>Dallas reaction - defensive</td>
+                                            <td>Canon FD 50mm f/1.2</td>
+                                            <td>Medium close-up</td>
+                                            <td>Handheld, slight</td>
+                                            <td>Shallow DOF, Dallas sharp</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>Marsh view through
+                                                windshield</td>
+                                            <td>Canon FD 24mm f/1.4</td>
+                                            <td>Wide shot through
+                                                windshield</td>
+                                            <td>Static from car interior</td>
+                                            <td>Rack focus interior to
+                                                marsh</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>Device warning beep</td>
+                                            <td>Canon FD 85mm f/1.8</td>
+                                            <td>Close-up device beeping</td>
+                                            <td>Static, focused</td>
+                                            <td>Sharp on device and hand</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td>Dominic building his case</td>
+                                            <td>Canon FD 50mm f/1.2</td>
+                                            <td>Medium shot Dominic
+                                                animated</td>
+                                            <td>Handheld, energetic</td>
+                                            <td>Shallow DOF, Dominic sharp</td>
+                                        </tr>
+                                        <tr class="table-info">
+                                            <td colspan="6"><strong>EXT. SCHOOL
+                                                    - CONTINUOUS</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>11</td>
+                                            <td>Kids emerging - wide shot</td>
+                                            <td>Canon FD 24mm f/1.4</td>
+                                            <td>Wide shot through
+                                                windshield</td>
+                                            <td>Static, observational</td>
+                                            <td>Deep focus, kids and school</td>
+                                        </tr>
+                                        <tr>
+                                            <td>12</td>
+                                            <td>Kids close-up - animated
+                                                conversation</td>
+                                            <td>Canon FD 50mm f/1.2</td>
+                                            <td>Medium shot Mac and Makayla</td>
+                                            <td>Handheld following</td>
+                                            <td>Shallow DOF, kids sharp</td>
+                                        </tr>
+                                        <tr>
+                                            <td>13</td>
+                                            <td>Dominic's ghost story
+                                                dismissal</td>
+                                            <td>Canon FD 50mm f/1.2</td>
+                                            <td>Medium shot Dominic waving</td>
+                                            <td>Static in car</td>
+                                            <td>Dominic sharp, Dallas soft</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14</td>
+                                            <td>Makayla's urgent whisper</td>
+                                            <td>Canon FD 85mm f/1.8</td>
+                                            <td>Close-up Makayla whispering</td>
+                                            <td>Handheld, intimate</td>
+                                            <td>Sharp on faces, background
+                                                soft</td>
+                                        </tr>
+                                        <tr>
+                                            <td>15</td>
+                                            <td>Dominic getting out</td>
+                                            <td>Canon FD 35mm f/2</td>
+                                            <td>Medium shot Dominic exiting</td>
+                                            <td>Static from car interior</td>
+                                            <td>Dominic in focus, background
+                                                soft</td>
+                                        </tr>
+                                        <tr>
+                                            <td>16</td>
+                                            <td>Dallas troubled expression</td>
+                                            <td>Canon FD 50mm f/1.2</td>
+                                            <td>Close-up Dallas's face</td>
+                                            <td>Static, contemplative</td>
+                                            <td>Shallow DOF, Dallas sharp</td>
+                                        </tr>
+                                        <tr>
+                                            <td>17</td>
+                                            <td>Dominic's final warning</td>
+                                            <td>Canon FD 50mm f/1.2</td>
+                                            <td>Medium shot Dominic walking</td>
+                                            <td>Handheld following</td>
+                                            <td>Dominic sharp, suburban
+                                                background soft</td>
+                                        </tr>
+                                        <tr>
+                                            <td>18</td>
+                                            <td>Final ominous wide</td>
+                                            <td>Canon FD 24mm f/1.4</td>
+                                            <td>Wide shot Dallas in car</td>
+                                            <td>Static, high angle</td>
+                                            <td>Deep focus, character and
+                                                marsh</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% elif scene.scene_number == 10 %}
+                            <!-- Dallas and Mac Conversation Shot List -->
+                            <div class="alert alert-info">
+                                <i class="fas fa-video"></i>
+                                <strong>Camera:</strong> RED KOMODO 6K |
+                                <strong>Lenses:</strong> Vintage Canon FD Lenses
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Shot #</th>
+                                            <th>Description</th>
+                                            <th>Lens</th>
+                                            <th>Framing</th>
+                                            <th>Movement</th>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1A</td>
+                                            <td>Wide shot - Mac and Dallas in
+                                                conversation</td>
+                                            <td>Wide angle lens</td>
+                                            <td>Wide shot</td>
+                                            <td>Static</td>
+                                            <td>Establishing shot</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1B</td>
+                                            <td>Medium shot - Mac's
+                                                reaction</td>
+                                            <td>50mm lens</td>
+                                            <td>Medium shot</td>
+                                            <td>Static</td>
+                                            <td>Over Dallas' shoulder</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1C</td>
+                                            <td>Medium shot - Dallas'
+                                                response</td>
+                                            <td>50mm lens</td>
+                                            <td>Medium shot</td>
+                                            <td>Static</td>
+                                            <td>Over Mac's shoulder</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1D</td>
+                                            <td>Close-up - Mac's hands</td>
+                                            <td>85mm lens</td>
+                                            <td>Close-up</td>
+                                            <td>Static</td>
+                                            <td>Emotional moment</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1E</td>
+                                            <td>Two-shot - Both characters</td>
+                                            <td>35mm lens</td>
+                                            <td>Two-shot</td>
+                                            <td>Static</td>
+                                            <td>Final moment of scene</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% else %}
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle"></i>
+                                <strong>Shot list:</strong> Details will be
+                                available when this scene is scheduled for
+                                filming.
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Schedule Information -->
+                    {% if scene.call_sheet_id %}
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Schedule Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-success">
+                                <i class="fas fa-calendar"></i>
+                                <strong>This scene is scheduled for
+                                    filming.</strong>
+                            </div>
+                            <p><strong>Call Sheet:</strong> <a
+                                    href="{{ url_for('crew_callsheet_detail', sheet_id=scene.call_sheet_id) }}">View
+                                    Call Sheet</a></p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Scene Actions -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Scene Actions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <a href="{{ url_for('crew_scenes') }}"
+                                    class="btn btn-outline-primary">
+                                    <i class="fas fa-list"></i> Back to All
+                                    Scenes
+                                </a>
+                                {% if scene.call_sheet_id %}
+                                <a
+                                    href="{{ url_for('crew_callsheet_detail', sheet_id=scene.call_sheet_id) }}"
+                                    class="btn btn-outline-info">
+                                    <i class="fas fa-calendar"></i> View Call
+                                    Sheet
+                                </a>
+                                {% endif %}
+                                <a href="{{ url_for('crew_shotlist') }}"
+                                    class="btn btn-outline-success">
+                                    <i class="fas fa-video"></i> View Shot List
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scene Timeline -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Scene Timeline</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div
+                                        class="timeline-marker bg-primary"></div>
+                                    <div class="timeline-content">
+                                        <h6>Created</h6>
+                                        <p class="small text-muted">{{
+                                            scene.created_at.strftime('%B %d, %Y')
+                                            }}</p>
+                                    </div>
+                                </div>
+                                {% if scene.updated_at != scene.created_at %}
+                                <div class="timeline-item">
+                                    <div
+                                        class="timeline-marker bg-warning"></div>
+                                    <div class="timeline-content">
+                                        <h6>Last Updated</h6>
+                                        <p class="small text-muted">{{
+                                            scene.updated_at.strftime('%B %d, %Y')
+                                            }}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if scene.call_sheet_id %}
+                                <div class="timeline-item">
+                                    <div
+                                        class="timeline-marker bg-success"></div>
+                                    <div class="timeline-content">
+                                        <h6>Scheduled</h6>
+                                        <p class="small text-muted">Added to
+                                            call sheet</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Scenes -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Related Scenes</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                {% if scene.scene_number > 1 %}
+                                <a
+                                    href="{{ url_for('crew_scene_detail', scene_id=scene.id-1) }}"
+                                    class="list-group-item list-group-item-action">
+                                    <i class="fas fa-arrow-left"></i> Previous
+                                    Scene
+                                </a>
+                                {% endif %}
+                                {% if scene.scene_number < 50 %}
+                                <a
+                                    href="{{ url_for('crew_scene_detail', scene_id=scene.id+1) }}"
+                                    class="list-group-item list-group-item-action">
+                                    <i class="fas fa-arrow-right"></i> Next
+                                    Scene
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -30px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.timeline-content h6 {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+</style>
+{% endblock %}

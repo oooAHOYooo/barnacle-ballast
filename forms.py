@@ -1,5 +1,5 @@
 """
-WTForms for Barnacle Ballast Inc.
+WTForms for Barnacle Films Inc.
 """
 
 from flask_wtf import FlaskForm

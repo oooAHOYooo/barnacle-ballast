@@ -12,6 +12,87 @@
         </div>
     </div>
 
+    <!-- Morning Announcements -->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-bullhorn"></i> Morning Announcements
+                        <small class="float-end">{{ today.strftime('%B %d, %Y')
+                            }}</small>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success">
+                        <h5><i class="fas fa-star"></i> New Features &
+                            Updates</h5>
+                        <ul class="mb-0">
+                            <li><strong>Master Scenes System:</strong> Complete
+                                scene breakdown with 50 scenes now
+                                available</li>
+                            <li><strong>Scene-Based Shot Lists:</strong> Shot
+                                lists now organized by scene with detailed
+                                technical specs</li>
+                            <li><strong>Enhanced Navigation:</strong> New
+                                "Scenes" section in crew portal for better
+                                organization</li>
+                            <li><strong>PDF Export:</strong> Print and export
+                                shot lists for on-set reference</li>
+                            <li><strong>Advanced Filtering:</strong> Search and
+                                filter scenes by location, status, and
+                                keywords</li>
+                            <li><strong>Scene Integration:</strong> Shot lists
+                                now linked to master scene list for better
+                                workflow</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-calendar"></i> Today's
+                            Schedule</h5>
+                        {% if call_sheet %}
+                        <p class="mb-0">
+                            <strong>{{ call_sheet.title }}</strong><br>
+                            <strong>Time:</strong> {{ call_sheet.call_time }} -
+                            {{ call_sheet.wrap_time }}<br>
+                            <strong>Location:</strong> {{ call_sheet.location }}
+                        </p>
+                        {% else %}
+                        <p class="mb-0">No filming scheduled for today.</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <h5><i class="fas fa-info-circle"></i> Quick Links</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="{{ url_for('crew_scenes') }}"
+                                    class="btn btn-outline-primary btn-sm me-2 mb-2">
+                                    <i class="fas fa-list"></i> Master Scenes
+                                </a>
+                                <a href="{{ url_for('crew_shotlist') }}"
+                                    class="btn btn-outline-success btn-sm me-2 mb-2">
+                                    <i class="fas fa-video"></i> Shot Lists
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ url_for('crew_callsheets') }}"
+                                    class="btn btn-outline-info btn-sm me-2 mb-2">
+                                    <i class="fas fa-calendar"></i> Call Sheets
+                                </a>
+                                <a href="{{ url_for('crew_contacts') }}"
+                                    class="btn btn-outline-warning btn-sm me-2 mb-2">
+                                    <i class="fas fa-phone"></i> Contacts
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Upcoming Events -->
     {% if upcoming_call_sheets %}
     <div class="row mb-4">

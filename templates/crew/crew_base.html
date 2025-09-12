@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Crew Portal - Barnacle Ballast Inc.{% endblock
+        <title>{% block title %}Crew Portal - Barnacle Films Inc.{% endblock
             %}</title>
 
         <!-- Favicon -->
@@ -58,6 +58,15 @@
                         <li class="nav-item">
                             <a class="nav-link"
                                 href="{{ url_for('crew_scripts') }}">Scripts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{{ url_for('crew_shotlist') }}">Shot
+                                List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{{ url_for('crew_scenes') }}">Scenes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
@@ -131,7 +140,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <p class="mb-0">&copy; 2025 Barnacle Ballast Inc. - Crew
+                        <p class="mb-0">&copy; 2025 Barnacle Films Inc. - Crew
                             Portal</p>
                     </div>
                     <div class="col-md-6 text-md-end">

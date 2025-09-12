@@ -1,0 +1,337 @@
+{% extends "crew/crew_base.html" %}
+
+{% block title %}Master Scenes - Barnacle Films Inc.{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-black mb-4">Master Scenes</h1>
+            <p class="lead text-muted mb-4">Complete scene breakdown for
+                "Creatures in the Tall Grass"</p>
+
+            <!-- Scene Statistics -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="text-primary">{{ scenes|length }}</h3>
+                            <p class="card-text">Total Scenes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="text-success">{{
+                                scenes|selectattr('status', 'equalto',
+                                'completed')|list|length }}</h3>
+                            <p class="card-text">Completed</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="text-warning">{{
+                                scenes|selectattr('status', 'equalto',
+                                'in_progress')|list|length }}</h3>
+                            <p class="card-text">In Progress</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="text-info">{{ scenes|selectattr('status',
+                                'equalto', 'planned')|list|length }}</h3>
+                            <p class="card-text">Planned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter and Search -->
+            <div class="row mb-4">
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-text"><i
+                                class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" id="sceneSearch"
+                            placeholder="Search scenes...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="statusFilter">
+                        <option value>All Status</option>
+                        <option value="planned">Planned</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" id="locationFilter">
+                        <option value>All Locations</option>
+                        <option value="Marsh">Marsh</option>
+                        <option value="Bole's House">Bole's House</option>
+                        <option value="Car">Car</option>
+                        <option value="School">School</option>
+                        <option value="Neighborhood">Neighborhood</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <div class="btn-group" role="group">
+                        <button type="button"
+                            class="btn btn-outline-secondary active"
+                            id="listViewBtn" title="List View">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary"
+                            id="gridViewBtn" title="Grid View">
+                            <i class="fas fa-th"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenes Container -->
+            <div id="scenesContainer">
+                <!-- List View -->
+                <div id="listView" class="d-block">
+                    {% for scene in scenes %}
+                    <div class="card mb-3 scene-card list-item"
+                        data-scene-number="{{ scene.scene_number }}"
+                        data-status="{{ scene.status }}"
+                        data-location="{{ scene.location }}"
+                        data-title="{{ scene.title|lower }}"
+                        data-description="{{ scene.description|lower }}">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-1">
+                                    <h5 class="mb-0 text-primary">Scene {{
+                                        scene.scene_number }}</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6 class="mb-1">{{ scene.title }}</h6>
+                                    <p class="small text-muted mb-0">{{
+                                        scene.description[:80] }}{% if
+                                        scene.description|length > 80 %}...{%
+                                        endif %}</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <small class="text-muted">
+                                        <strong>Location:</strong><br>
+                                        {{ scene.location }}
+                                    </small>
+                                </div>
+                                <div class="col-md-2">
+                                    <small class="text-muted">
+                                        <strong>Time:</strong><br>
+                                        {{ scene.time_of_day }}
+                                    </small>
+                                </div>
+                                <div class="col-md-2">
+                                    <small class="text-muted">
+                                        <strong>Duration:</strong><br>
+                                        {{ scene.estimated_duration }}
+                                    </small>
+                                </div>
+                                <div class="col-md-2 text-end">
+                                    <div class="mb-2">
+                                        <span
+                                            class="badge bg-{{ 'success' if scene.status == 'completed' else 'warning' if scene.status == 'in_progress' else 'info' }}">
+                                            {{ scene.status|title }}
+                                        </span>
+                                        {% if scene.shot_count > 0 %}
+                                        <span class="badge bg-primary ms-1">{{
+                                            scene.shot_count }} shots</span>
+                                        {% endif %}
+                                        {% if scene.call_sheet_id %}
+                                        <span
+                                            class="badge bg-success ms-1">Scheduled</span>
+                                        {% endif %}
+                                    </div>
+                                    <a
+                                        href="{{ url_for('crew_scene_detail', scene_id=scene.id) }}"
+                                        class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Grid View -->
+                <div id="gridView" class="d-none">
+                    <div class="row">
+                        {% for scene in scenes %}
+                        <div class="col-lg-4 col-md-6 mb-4 scene-card grid-item"
+                            data-scene-number="{{ scene.scene_number }}"
+                            data-status="{{ scene.status }}"
+                            data-location="{{ scene.location }}"
+                            data-title="{{ scene.title|lower }}"
+                            data-description="{{ scene.description|lower }}">
+                            <div class="card h-100 scene-card-inner">
+                                <div
+                                    class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Scene {{ scene.scene_number
+                                        }}</h5>
+                                    <span
+                                        class="badge bg-{{ 'success' if scene.status == 'completed' else 'warning' if scene.status == 'in_progress' else 'info' }}">
+                                        {{ scene.status|title }}
+                                    </span>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ scene.title
+                                        }}</h6>
+                                    <p class="card-text small text-muted">{{
+                                        scene.description[:100] }}{% if
+                                        scene.description|length > 100 %}...{%
+                                        endif %}</p>
+
+                                    <div class="row small mb-2">
+                                        <div class="col-6">
+                                            <strong>Location:</strong><br>
+                                            {{ scene.location }}
+                                        </div>
+                                        <div class="col-6">
+                                            <strong>Time:</strong><br>
+                                            {{ scene.time_of_day }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row small mb-2">
+                                        <div class="col-6">
+                                            <strong>Type:</strong><br>
+                                            {{ scene.scene_type }}
+                                        </div>
+                                        <div class="col-6">
+                                            <strong>Duration:</strong><br>
+                                            {{ scene.estimated_duration }}
+                                        </div>
+                                    </div>
+
+                                    {% if scene.characters %}
+                                    <div class="mb-2">
+                                        <strong>Characters:</strong><br>
+                                        <span class="small">{{ scene.characters
+                                            }}</span>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if scene.shot_count > 0 %}
+                                    <div class="mb-2">
+                                        <strong>Shots:</strong> {{
+                                        scene.shot_count }}
+                                    </div>
+                                    {% endif %}
+
+                                    {% if scene.call_sheet_id %}
+                                    <div class="mb-2">
+                                        <span
+                                            class="badge bg-primary">Scheduled</span>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="card-footer">
+                                    <a
+                                        href="{{ url_for('crew_scene_detail', scene_id=scene.id) }}"
+                                        class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- No scenes message -->
+            {% if not scenes %}
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-info text-center">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>No scenes found.</strong> Check back later for
+                        scene updates.
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+// Scene filtering and search functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('sceneSearch');
+    const statusFilter = document.getElementById('statusFilter');
+    const locationFilter = document.getElementById('locationFilter');
+    const listViewBtn = document.getElementById('listViewBtn');
+    const gridViewBtn = document.getElementById('gridViewBtn');
+    const listView = document.getElementById('listView');
+    const gridView = document.getElementById('gridView');
+    
+    function filterScenes() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const statusValue = statusFilter.value;
+        const locationValue = locationFilter.value;
+        
+        // Filter both list and grid views
+        const listItems = document.querySelectorAll('.list-item');
+        const gridItems = document.querySelectorAll('.grid-item');
+        
+        [listItems, gridItems].forEach(items => {
+            items.forEach(card => {
+                const title = card.dataset.title;
+                const description = card.dataset.description;
+                const status = card.dataset.status;
+                const location = card.dataset.location;
+                
+                const matchesSearch = !searchTerm || 
+                    title.includes(searchTerm) || 
+                    description.includes(searchTerm);
+                
+                const matchesStatus = !statusValue || status === statusValue;
+                const matchesLocation = !locationValue || location === locationValue;
+                
+                if (matchesSearch && matchesStatus && matchesLocation) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+    
+    function toggleView(view) {
+        if (view === 'list') {
+            listView.classList.remove('d-none');
+            listView.classList.add('d-block');
+            gridView.classList.remove('d-block');
+            gridView.classList.add('d-none');
+            listViewBtn.classList.add('active');
+            gridViewBtn.classList.remove('active');
+        } else {
+            listView.classList.remove('d-block');
+            listView.classList.add('d-none');
+            gridView.classList.remove('d-none');
+            gridView.classList.add('d-block');
+            listViewBtn.classList.remove('active');
+            gridViewBtn.classList.add('active');
+        }
+    }
+    
+    searchInput.addEventListener('input', filterScenes);
+    statusFilter.addEventListener('change', filterScenes);
+    locationFilter.addEventListener('change', filterScenes);
+    
+    listViewBtn.addEventListener('click', () => toggleView('list'));
+    gridViewBtn.addEventListener('click', () => toggleView('grid'));
+});
+</script>
+{% endblock %}

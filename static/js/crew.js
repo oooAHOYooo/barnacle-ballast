@@ -1,5 +1,5 @@
 /**
- * Crew Portal JavaScript for Barnacle Ballast Inc.
+ * Crew Portal JavaScript for Barnacle Films Inc.
  * Enhanced functionality for crew members
  */
 

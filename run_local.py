@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Quick start script for Barnacle Ballast local development
+Quick start script for Barnacle Films local development
 """
 import os
 import sys

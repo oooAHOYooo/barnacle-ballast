@@ -3,12 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Barnacle Ballast Inc. - Independent Film
+        <title>{% block title %}Barnacle Films Inc. - Independent Film
             Production{% endblock %}</title>
         <meta name="description"
             content="{% block description %}Independent film production company creating character-driven narratives. Currently producing 'Creatures in the Tall Grass' - a rural family drama.{% endblock %}">
         <meta name="keywords"
-            content="{% block keywords %}independent film production, character-driven narratives, rural drama, filmmaking, Barnacle Ballast, Creatures in the Tall Grass{% endblock %}">
+            content="{% block keywords %}independent film production, character-driven narratives, rural drama, filmmaking, Barnacle Films, Creatures in the Tall Grass{% endblock %}">
 
         <!-- Favicon -->
         <link rel="icon" type="image/svg+xml"
@@ -38,7 +38,7 @@
         {
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Barnacle Ballast Inc.",
+            "name": "Barnacle Films Inc.",
             "description": "Independent film production company creating character-driven narratives",
             "url": "{{ request.url_root }}",
             "logo": "{{ request.url_root }}static/favicon/favicon.svg",
@@ -126,12 +126,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5>Barnacle Ballast Inc.</h5>
+                        <h5>Barnacle Films Inc.</h5>
                         <p class="mb-0">Independent film production company
                             specializing in character-driven narratives.</p>
                     </div>
                     <div class="col-md-6 text-md-end">
-                        <p class="mb-0">&copy; 2025 Barnacle Ballast Inc. All
+                        <p class="mb-0">&copy; 2025 Barnacle Films Inc. All
                             rights reserved.</p>
                         <p class="mb-0">
                             <a href="{{ url_for('contact') }}"

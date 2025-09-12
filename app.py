@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Barnacle Ballast Inc. - Main Flask Application
+Barnacle Films Inc. - Main Flask Application
 Production Management System for Independent Filmmaking
 """
 
@@ -104,6 +104,27 @@ class Contact(db.Model):
     
     def __repr__(self):
         return f'<Contact {self.name} - {self.role}>'
+
+class Scene(db.Model):
+    """Scene model for master scene breakdown"""
+    id = db.Column(db.Integer, primary_key=True)
+    scene_number = db.Column(db.Integer, nullable=False, unique=True)
+    title = db.Column(db.String(200), nullable=False)
+    location = db.Column(db.String(200), nullable=False)
+    time_of_day = db.Column(db.String(50), nullable=False)  # DAY, NIGHT, DAWN, DUSK
+    scene_type = db.Column(db.String(50), nullable=False)  # INT, EXT, INT/EXT
+    description = db.Column(db.Text)
+    characters = db.Column(db.Text)  # JSON string of character names
+    estimated_duration = db.Column(db.String(20))  # e.g., "2-3 minutes"
+    status = db.Column(db.String(20), default='planned')  # planned, shot, in_progress, completed
+    call_sheet_id = db.Column(db.Integer, db.ForeignKey('call_sheet.id'), nullable=True)
+    shot_count = db.Column(db.Integer, default=0)
+    notes = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    def __repr__(self):
+        return f'<Scene {self.scene_number}: {self.title}>'
 
 class Announcement(db.Model):
     """Announcement model for crew communications"""
@@ -211,7 +232,8 @@ def crew_dashboard():
                          call_sheet=todays_call_sheet,
                          upcoming_call_sheets=upcoming_call_sheets,
                          weather=weather,
-                         posts=recent_posts)
+                         posts=recent_posts,
+                         today=datetime.now())
 
 @app.route('/crew/callsheets')
 def crew_callsheets():
@@ -241,6 +263,48 @@ def crew_scripts():
     sides = Document.query.filter_by(document_type='sides').order_by(Document.created_at.desc()).all()
     
     return render_template('crew/scripts.html', scripts=scripts, sides=sides)
+
+@app.route('/crew/shotlist')
+def crew_shotlist():
+    """Shot list page"""
+    if not session.get('crew_logged_in'):
+        return redirect(url_for('crew_login'))
+    
+    # Get all scenes ordered by scene number for shot list index
+    scenes = Scene.query.order_by(Scene.scene_number).all()
+    
+    return render_template('crew/shotlist.html', scenes=scenes)
+
+@app.route('/crew/scenes')
+def crew_scenes():
+    """Master scenes list page"""
+    if not session.get('crew_logged_in'):
+        return redirect(url_for('crew_login'))
+    
+    # Get all scenes ordered by scene number
+    scenes = Scene.query.order_by(Scene.scene_number).all()
+    
+    return render_template('crew/scenes.html', scenes=scenes)
+
+@app.route('/crew/scenes/<int:scene_id>')
+def crew_scene_detail(scene_id):
+    """Individual scene detail page"""
+    if not session.get('crew_logged_in'):
+        return redirect(url_for('crew_login'))
+    
+    scene = Scene.query.get_or_404(scene_id)
+    
+    return render_template('crew/scene_detail.html', scene=scene)
+
+@app.route('/crew/scenes/<int:scene_id>/shots')
+def crew_scene_shots(scene_id):
+    """Individual scene shot list page"""
+    if not session.get('crew_logged_in'):
+        return redirect(url_for('crew_login'))
+    
+    scene = Scene.query.get_or_404(scene_id)
+    
+    return render_template('crew/scene_shots.html', scene=scene)
 
 @app.route('/crew/storyboards')
 def crew_storyboards():

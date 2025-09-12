@@ -1,5 +1,5 @@
 """
-Database Models for Barnacle Ballast Inc.
+Database Models for Barnacle Films Inc.
 """
 
 from datetime import datetime
@@ -88,6 +88,27 @@ class Contact(db.Model):
     
     def __repr__(self):
         return f'<Contact {self.name} - {self.role}>'
+
+class Scene(db.Model):
+    """Scene model for master scene breakdown"""
+    id = db.Column(db.Integer, primary_key=True)
+    scene_number = db.Column(db.Integer, nullable=False, unique=True)
+    title = db.Column(db.String(200), nullable=False)
+    location = db.Column(db.String(200), nullable=False)
+    time_of_day = db.Column(db.String(50), nullable=False)  # DAY, NIGHT, DAWN, DUSK
+    scene_type = db.Column(db.String(50), nullable=False)  # INT, EXT, INT/EXT
+    description = db.Column(db.Text)
+    characters = db.Column(db.Text)  # JSON string of character names
+    estimated_duration = db.Column(db.String(20))  # e.g., "2-3 minutes"
+    status = db.Column(db.String(20), default='planned')  # planned, shot, in_progress, completed
+    call_sheet_id = db.Column(db.Integer, db.ForeignKey('call_sheet.id'), nullable=True)
+    shot_count = db.Column(db.Integer, default=0)
+    notes = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    def __repr__(self):
+        return f'<Scene {self.scene_number}: {self.title}>'
 
 class Announcement(db.Model):
     """Announcement model for crew communications"""

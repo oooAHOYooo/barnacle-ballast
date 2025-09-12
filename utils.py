@@ -1,5 +1,5 @@
 """
-Utility functions for Barnacle Ballast Inc.
+Utility functions for Barnacle Films Inc.
 """
 
 import os

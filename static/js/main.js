@@ -1,5 +1,5 @@
 /**
- * Main JavaScript for Barnacle Ballast Inc.
+ * Main JavaScript for Barnacle Films Inc.
  * Public site functionality
  */
 

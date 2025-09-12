@@ -191,7 +191,7 @@ window.addEventListener('scroll', function() {
 });
 
 // Export functions for use in other scripts
-window.BarnacleBallast = {
+window.BarnacleFilms = {
     isValidEmail,
     formatDate,
     formatTime,

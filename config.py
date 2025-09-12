@@ -4,7 +4,7 @@ from datetime import timedelta
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'your-secret-key-for-development'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///barnacle_ballast.db'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///barnacle_films.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Upload settings
@@ -21,7 +21,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///barnacle_ballast_dev.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///barnacle_films_dev.db'
 
 class ProductionConfig(Config):
     DEBUG = False
@@ -30,7 +30,7 @@ class ProductionConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///barnacle_ballast_test.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///barnacle_films_test.db'
 
 config = {
     'development': DevelopmentConfig,

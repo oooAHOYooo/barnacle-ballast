@@ -1,7 +1,7 @@
 # render.yaml (for Render.com deployment)
 services:
   - type: web
-    name: barnacle-ballast
+    name: barnacle-films
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
@@ -12,11 +12,11 @@ services:
         value: STUDIO!@#
       - key: DATABASE_URL
         fromDatabase:
-          name: barnacle-ballast-db
+          name: barnacle-films-db
           property: connectionString
 
 databases:
-  - name: barnacle-ballast-db
-    databaseName: barnacle_ballast
+  - name: barnacle-films-db
+    databaseName: barnacle_films
     user: barnacle_user
 

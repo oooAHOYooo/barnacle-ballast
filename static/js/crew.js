@@ -274,57 +274,6 @@ function quickSMS(phoneNumber) {
     window.location.href = `sms:${phoneNumber}`;
 }
 
-// Password protection for sides
-let currentSide = null;
-
-function showPasswordModal(sideId) {
-    currentSide = sideId;
-    const modal = new bootstrap.Modal(document.getElementById('passwordModal'));
-    modal.show();
-    
-    // Clear previous input and error
-    document.getElementById('passwordInput').value = '';
-    document.getElementById('passwordError').style.display = 'none';
-}
-
-function checkPassword() {
-    const password = document.getElementById('passwordInput').value;
-    const errorDiv = document.getElementById('passwordError');
-    
-    // Simple password check - in production, this would be server-side
-    const correctPasswords = {
-        'side1': 'macdallas2025',
-        'side2': 'dominicdallas2025'
-    };
-    
-    if (password === correctPasswords[currentSide]) {
-        // Close modal
-        const modal = bootstrap.Modal.getInstance(document.getElementById('passwordModal'));
-        modal.hide();
-        
-        // Open the document
-        if (currentSide === 'side1') {
-            window.open('/static/documents/sides/CINTG_SIDE_1_Mac and Dallas - Draft 1.pdf', '_blank');
-        } else if (currentSide === 'side2') {
-            showNotification('Side 2 is still in development', 'info');
-        }
-    } else {
-        errorDiv.style.display = 'block';
-        document.getElementById('passwordInput').value = '';
-    }
-}
-
-// Handle Enter key in password input
-document.addEventListener('DOMContentLoaded', function() {
-    const passwordInput = document.getElementById('passwordInput');
-    if (passwordInput) {
-        passwordInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-    }
-});
 
 // Export crew-specific functions
 window.CrewPortal = {
@@ -334,7 +283,5 @@ window.CrewPortal = {
     quickCall,
     quickEmail,
     quickSMS,
-    handleFileUpload,
-    showPasswordModal,
-    checkPassword
+    handleFileUpload
 };

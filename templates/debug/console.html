@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}Debug Console - Barnacle Films{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="text-black mb-2">
+                        <i class="fas fa-terminal"></i> Debug Console
+                    </h1>
+                    <p class="text-muted">System administration and
+                        monitoring</p>
+                </div>
+                <div>
+                    <a href="{{ url_for('debug_logout') }}"
+                        class="btn btn-outline-danger">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Status -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-film fa-2x text-primary mb-2"></i>
+                    <h5 class="card-title">{{ scenes }}</h5>
+                    <p class="card-text text-muted">Scenes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-calendar fa-2x text-success mb-2"></i>
+                    <h5 class="card-title">{{ call_sheets }}</h5>
+                    <p class="card-text text-muted">Call Sheets</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-users fa-2x text-info mb-2"></i>
+                    <h5 class="card-title">{{ contacts }}</h5>
+                    <p class="card-text text-muted">Contacts</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-file fa-2x text-warning mb-2"></i>
+                    <h5 class="card-title">{{ documents }}</h5>
+                    <p class="card-text text-muted">Documents</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-tools"></i> Quick
+                        Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <a href="{{ url_for('crew_dashboard') }}"
+                                class="btn btn-outline-primary w-100">
+                                <i class="fas fa-tachometer-alt"></i> Crew
+                                Dashboard
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="{{ url_for('crew_scenes') }}"
+                                class="btn btn-outline-success w-100">
+                                <i class="fas fa-list"></i> Scene Management
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="{{ url_for('crew_contacts') }}"
+                                class="btn btn-outline-info w-100">
+                                <i class="fas fa-address-book"></i> Contact
+                                Management
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Information -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-info-circle"></i> System
+                        Info</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <tr>
+                            <td><strong>Application:</strong></td>
+                            <td>Barnacle Films Portal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Version:</strong></td>
+                            <td>1.0.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Environment:</strong></td>
+                            <td>Development</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Database:</strong></td>
+                            <td>SQLite</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Last Updated:</strong></td>
+                            <td>{{ moment().format('YYYY-MM-DD HH:mm:ss')
+                                }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-database"></i> Database
+                        Status</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i> Database connection
+                        active
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> All tables
+                        synchronized
+                    </div>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i> Debug mode
+                        enabled
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

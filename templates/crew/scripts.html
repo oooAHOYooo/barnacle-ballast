@@ -12,20 +12,6 @@
         </div>
     </div>
 
-    <!-- Work in Progress Notice -->
-    <div class="row mb-4">
-        <div class="col">
-            <div class="alert alert-warning">
-                <i class="fas fa-tools"></i>
-                <strong>Work in Progress:</strong> This section is under active
-                development. Most content is placeholder data.
-                Check the <a href="{{ url_for('crew_dashboard') }}"
-                    class="alert-link">morning announcements</a> for the latest
-                updates and new features.
-            </div>
-        </div>
-    </div>
-
     <!-- Scripts Section -->
     <div class="row mb-5">
         <div class="col">
@@ -85,14 +71,16 @@
                                     class="text-success">Ready</span>
                             </p>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-primary btn-sm"
-                                    onclick="showPasswordModal('side1')">
+                                <a
+                                    href="{{ url_for('static', filename='documents/sides/CINTG_SIDE_1_Mac and Dallas - Draft 1.pdf') }}"
+                                    class="btn btn-primary btn-sm"
+                                    target="_blank">
                                     <i class="fas fa-eye"></i> View
-                                </button>
+                                </a>
                                 <a
                                     href="{{ url_for('static', filename='documents/sides/CINTG_SIDE_1_Mac and Dallas - Draft 1.pdf') }}"
                                     class="btn btn-outline-primary btn-sm"
-                                    target="_blank">
+                                    download>
                                     <i class="fas fa-download"></i> Download
                                 </a>
                                 <span class="badge bg-success">Side</span>
@@ -108,64 +96,31 @@
                             <h5 class="card-title">Side 2: Dominic and
                                 Dallas</h5>
                             <p class="card-text small text-muted">
-                                In development
+                                Car scene with raccoon conspiracy theories
                             </p>
                             <p class="card-text small">
                                 <strong>Characters:</strong> Dominic (Matt
                                 Grant), Dallas (Dallas)<br>
                                 <strong>Status:</strong> <span
-                                    class="text-warning">Coming Soon</span>
+                                    class="text-success">Ready</span>
                             </p>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-secondary btn-sm"
-                                    disabled>
+                                <a
+                                    href="{{ url_for('static', filename='documents/sides/CINTG_SIDE_2_Dominic and Dallas - Draft 1.pdf') }}"
+                                    class="btn btn-primary btn-sm"
+                                    target="_blank">
                                     <i class="fas fa-eye"></i> View
-                                </button>
-                                <button class="btn btn-outline-secondary btn-sm"
-                                    disabled>
+                                </a>
+                                <a
+                                    href="{{ url_for('static', filename='documents/sides/CINTG_SIDE_2_Dominic and Dallas - Draft 1.pdf') }}"
+                                    class="btn btn-outline-primary btn-sm"
+                                    download>
                                     <i class="fas fa-download"></i> Download
-                                </button>
-                                <span class="badge bg-warning">In
-                                    Development</span>
+                                </a>
+                                <span class="badge bg-success">Side</span>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Password Modal -->
-    <div class="modal fade" id="passwordModal" tabindex="-1"
-        aria-labelledby="passwordModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="passwordModalLabel">Enter
-                        Password</h5>
-                    <button type="button" class="btn-close"
-                        data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="passwordForm">
-                        <div class="mb-3">
-                            <label for="passwordInput"
-                                class="form-label">Password</label>
-                            <input type="password" class="form-control"
-                                id="passwordInput" required>
-                            <div id="passwordError"
-                                class="text-danger small mt-1"
-                                style="display: none;">
-                                Incorrect password. Please try again.
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary"
-                        onclick="checkPassword()">View Document</button>
                 </div>
             </div>
         </div>

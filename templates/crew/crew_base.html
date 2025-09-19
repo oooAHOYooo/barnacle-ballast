@@ -50,52 +50,59 @@
                             <a class="nav-link"
                                 href="{{ url_for('crew_dashboard') }}">Dashboard</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ url_for('crew_callsheets') }}">Call
-                                Sheets</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"
+                                id="productionDropdown" role="button"
+                                data-bs-toggle="dropdown">
+                                Production
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('crew_callsheets') }}">Call
+                                        Sheets</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('crew_schedule') }}">Schedule</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('crew_contacts') }}">Contacts</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"
+                                id="creativeDropdown" role="button"
+                                data-bs-toggle="dropdown">
+                                Creative
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('crew_scripts') }}">Scripts
+                                        & Sides</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('crew_shotlist') }}">Shot
+                                        Lists</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('crew_scenes') }}">Scenes</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('crew_storyboards') }}">Storyboards</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"
+                                id="mediaDropdown" role="button"
+                                data-bs-toggle="dropdown">
+                                Media
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('crew_dailies') }}">Dailies</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('crew_gallery') }}">Gallery</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('crew_documents') }}">Documents</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="{{ url_for('crew_scripts') }}">Scripts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ url_for('crew_shotlist') }}">Shot
-                                List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ url_for('crew_scenes') }}">Scenes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ url_for('crew_storyboards') }}">Storyboards</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ url_for('crew_schedule') }}">Schedule</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ url_for('crew_dailies') }}">Dailies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ url_for('crew_gallery') }}">Gallery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ url_for('crew_contacts') }}">Contacts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ url_for('crew_documents') }}">Documents</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ url_for('crew_access') }}">Crew
-                                Access</a>
+                                href="{{ url_for('crew_access') }}">Access</a>
                         </li>
                     </ul>
 

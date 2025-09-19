@@ -12,120 +12,79 @@
         </div>
     </div>
 
-    <!-- Morning Announcements -->
+    <!-- Project Header -->
     <div class="row mb-4">
         <div class="col">
             <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">
-                        <i class="fas fa-bullhorn"></i> Morning Announcements
-                        <small class="float-end">{{ today.strftime('%B %d, %Y')
-                            }}</small>
-                    </h4>
+                <div class="card-header bg-dark text-white">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="mb-0">
+                                <i class="fas fa-film"></i> Creatures in the
+                                Tall Grass
+                            </h4>
+                            <small>Independent Film Production</small>
+                        </div>
+                        <div class="col-auto">
+                            <span class="badge bg-success fs-6">In
+                                Production</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="alert alert-success">
-                        <h5><i class="fas fa-star"></i> New Features &
-                            Updates</h5>
-                        <ul class="mb-0">
-                            <li><strong>Master Scenes System:</strong> Complete
-                                scene breakdown with 50 scenes now
-                                available</li>
-                            <li><strong>Scene-Based Shot Lists:</strong> Shot
-                                lists now organized by scene with detailed
-                                technical specs</li>
-                            <li><strong>Enhanced Navigation:</strong> New
-                                "Scenes" section in crew portal for better
-                                organization</li>
-                            <li><strong>PDF Export:</strong> Print and export
-                                shot lists for on-set reference</li>
-                            <li><strong>Advanced Filtering:</strong> Search and
-                                filter scenes by location, status, and
-                                keywords</li>
-                            <li><strong>Scene Integration:</strong> Shot lists
-                                now linked to master scene list for better
-                                workflow</li>
-                            <li><strong>List/Grid Toggle:</strong> Switch
-                                between list and grid views for better data
-                                browsing</li>
-                            <li><strong>Work in Progress Notices:</strong> Clear
-                                indicators throughout the portal about
-                                development status</li>
-                        </ul>
-                    </div>
-
-                    <div class="alert alert-info">
-                        <h5><i class="fas fa-info-circle"></i> Development
-                            Status</h5>
-                        <p class="mb-0">
-                            <strong>Note:</strong> Most sections contain
-                            placeholder data as the system is under active
-                            development.
-                            Look for "Work in Progress" notices on each page for
-                            current status.
-                            The schedule and call sheets contain real production
-                            data.
-                        </p>
-                    </div>
-
-                    <div class="alert alert-success">
-                        <h5><i class="fas fa-video"></i> Updated Shot Lists for
-                            9.21.25</h5>
-                        <p class="mb-0">
-                            <strong>Side 1 - Dallas & Mac Kitchen Scene (Scene
-                                10):</strong>
-                            Complete 20-shot breakdown from kitchen to exterior
-                            cottage<br>
-                            <strong>Side 2 - Dominic Car Scene (Scene
-                                12):</strong>
-                            Complete 17-shot breakdown from neighborhood to
-                            school pickup<br>
-                            <strong>Equipment:</strong> RED KOMODO 6K with
-                            Vintage Canon FD Lenses (35mm, 50mm, 75mm)<br>
-                            <strong>Location:</strong> Bole's residence - 1:30
-                            PM - 5:00 PM<br>
-                            <strong>Format:</strong> New 8-column shot list with
-                            Scene, Location, Shot Type, Lens, Description,
-                            Movement, and Notes
-                        </p>
-                    </div>
-
-                    <div class="alert alert-info">
-                        <h5><i class="fas fa-calendar"></i> Today's
-                            Schedule</h5>
-                        {% if call_sheet %}
-                        <p class="mb-0">
-                            <strong>{{ call_sheet.title }}</strong><br>
-                            <strong>Time:</strong> {{ call_sheet.call_time }} -
-                            {{ call_sheet.wrap_time }}<br>
-                            <strong>Location:</strong> {{ call_sheet.location }}
-                        </p>
-                        {% else %}
-                        <p class="mb-0">No filming scheduled for today.</p>
-                        {% endif %}
-                    </div>
-
-                    <div class="alert alert-warning">
-                        <h5><i class="fas fa-info-circle"></i> Quick Links</h5>
+                    {% if call_sheet %}
+                    <div class="alert alert-success mb-0">
+                        <h5><i class="fas fa-video"></i> Next Up: {{
+                            call_sheet.title }}</h5>
                         <div class="row">
                             <div class="col-md-6">
-                                <a href="{{ url_for('crew_scenes') }}"
-                                    class="btn btn-outline-primary btn-sm me-2 mb-2">
-                                    <i class="fas fa-list"></i> Master Scenes
-                                </a>
-                                <a href="{{ url_for('crew_shotlist') }}"
-                                    class="btn btn-outline-success btn-sm me-2 mb-2">
-                                    <i class="fas fa-video"></i> Shot Lists
-                                </a>
+                                <strong>Date:</strong> {{
+                                call_sheet.date.strftime('%B %d, %Y') }}<br>
+                                <strong>Time:</strong> {{ call_sheet.call_time
+                                }} - {{ call_sheet.wrap_time }}<br>
+                                <strong>Location:</strong> {{
+                                call_sheet.location }}
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ url_for('crew_callsheets') }}"
-                                    class="btn btn-outline-info btn-sm me-2 mb-2">
-                                    <i class="fas fa-calendar"></i> Call Sheets
+                                <strong>Scenes:</strong> {{ call_sheet.scenes
+                                }}<br>
+                                <strong>Cast:</strong> {{ call_sheet.cast }}
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info mb-0">
+                        <h5><i class="fas fa-calendar"></i> No Filming
+                            Today</h5>
+                        <p class="mb-0">Check the schedule for upcoming
+                            production dates.</p>
+                    </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <a href="{{ url_for('crew_scripts') }}"
+                                    class="btn btn-outline-primary w-100 mb-2">
+                                    <i class="fas fa-file-alt"></i><br>Scripts &
+                                    Sides
                                 </a>
-                                <a href="{{ url_for('crew_contacts') }}"
-                                    class="btn btn-outline-warning btn-sm me-2 mb-2">
-                                    <i class="fas fa-phone"></i> Contacts
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <a href="{{ url_for('crew_shotlist') }}"
+                                    class="btn btn-outline-success w-100 mb-2">
+                                    <i class="fas fa-video"></i><br>Shot Lists
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <a href="{{ url_for('crew_callsheets') }}"
+                                    class="btn btn-outline-info w-100 mb-2">
+                                    <i class="fas fa-calendar"></i><br>Call
+                                    Sheets
                                 </a>
                             </div>
                         </div>
@@ -135,191 +94,132 @@
         </div>
     </div>
 
-    <!-- Upcoming Events -->
-    {% if upcoming_call_sheets %}
+    <!-- Production Schedule -->
     <div class="row mb-4">
-        <div class="col">
-            <h4 class="text-white mb-3">Upcoming Events</h4>
-            <div class="row">
-                {% for call_sheet in upcoming_call_sheets %}
-                <div class="col-md-6 col-lg-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title">{{ call_sheet.title }}</h6>
-                            <p class="card-text small text-muted">
-                                <strong>{{ call_sheet.date.strftime('%B %d, %Y')
-                                    }}</strong><br>
-                                {{ call_sheet.location }}<br>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-calendar-alt"></i>
+                        Production Schedule</h5>
+                </div>
+                <div class="card-body">
+                    {% if upcoming_call_sheets %}
+                    {% for call_sheet in upcoming_call_sheets %}
+                    <div
+                        class="d-flex justify-content-between align-items-center border-bottom py-2">
+                        <div>
+                            <h6 class="mb-1">{{ call_sheet.title }}</h6>
+                            <small class="text-muted">
+                                {{ call_sheet.date.strftime('%B %d, %Y') }} •
+                                {{ call_sheet.location }} •
                                 {{ call_sheet.call_time }} - {{
                                 call_sheet.wrap_time }}
-                            </p>
-                            <a
-                                href="{{ url_for('crew_callsheet_detail', sheet_id=call_sheet.id) }}"
-                                class="btn btn-outline-primary btn-sm">View
-                                Details</a>
+                            </small>
                         </div>
+                        <a
+                            href="{{ url_for('crew_callsheet_detail', sheet_id=call_sheet.id) }}"
+                            class="btn btn-outline-primary btn-sm">View</a>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p class="text-muted mb-0">No upcoming production dates
+                        scheduled.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-users"></i> Cast &
+                        Crew</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <a href="{{ url_for('crew_contacts') }}"
+                            class="btn btn-outline-primary w-100 mb-2">
+                            <i class="fas fa-address-book"></i><br>Contacts
+                        </a>
+                        <a href="{{ url_for('crew_access') }}"
+                            class="btn btn-outline-secondary w-100">
+                            <i class="fas fa-key"></i><br>Access Info
+                        </a>
                     </div>
                 </div>
-                {% endfor %}
             </div>
         </div>
     </div>
-    {% endif %}
 
-    <!-- Today's Overview -->
+    <!-- Production Tools -->
     <div class="row mb-4">
-        <div class="col-md-8">
-            {% if call_sheet %}
+        <div class="col-md-6">
             <div class="card">
-                <div class="call-sheet-header">
-                    <h4 class="mb-2">Today's Call Sheet</h4>
-                    <h5 class="mb-0">{{ call_sheet.title }}</h5>
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-tools"></i> Production
+                        Tools</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <p><strong>Date:</strong> {{
-                                call_sheet.date.strftime('%B %d, %Y') }}</p>
-                            <p><strong>Location:</strong> {{ call_sheet.location
-                                }}</p>
-                            <p><strong>Call Time:</strong> {{
-                                call_sheet.call_time }}</p>
+                        <div class="col-6 mb-2">
+                            <a href="{{ url_for('crew_scenes') }}"
+                                class="btn btn-outline-primary w-100">
+                                <i class="fas fa-list"></i><br>Scenes
+                            </a>
                         </div>
-                        <div class="col-md-6">
-                            <p><strong>Wrap Time:</strong> {{
-                                call_sheet.wrap_time }}</p>
-                            <p><strong>Weather:</strong> {{
-                                call_sheet.weather_contingency or 'TBD' }}</p>
-                            <p><strong>Scenes:</strong> {{ call_sheet.scenes or
-                                'TBD' }}</p>
-                        </div>
-                    </div>
-                    {% if call_sheet.special_notes %}
-                    <div class="alert alert-info mt-3">
-                        <strong>Special Notes:</strong> {{
-                        call_sheet.special_notes }}
-                    </div>
-                    {% endif %}
-                    <div class="mt-3">
-                        <a
-                            href="{{ url_for('crew_callsheet_detail', sheet_id=call_sheet.id) }}"
-                            class="btn btn-primary">View Full Call Sheet</a>
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <div class="card">
-                <div class="card-body text-center py-5">
-                    <h4>No Call Sheet for Today</h4>
-                    <p class="text-muted">Check the schedule for upcoming
-                        shoots.</p>
-                    <a href="{{ url_for('crew_schedule') }}"
-                        class="btn btn-primary">View Schedule</a>
-                </div>
-            </div>
-            {% endif %}
-        </div>
-
-        <div class="col-md-4">
-            <!-- Weather Widget -->
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h6 class="mb-0">Weather Conditions</h6>
-                </div>
-                <div class="card-body">
-                    <div id="weather-widget">
-                        <div class="text-center">
-                            <div class="spinner"></div>
-                            <p class="small text-muted">Loading weather...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Emergency Contacts -->
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="mb-0">Emergency Contacts</h6>
-                </div>
-                <div class="card-body">
-                    <div class="emergency-contact mb-2">
-                        <strong>Dylan (Mac)</strong><br>
-                        <small class="text-muted">dylan@ahoy.ooo</small>
-                    </div>
-                    <div class="emergency-contact mb-2">
-                        <strong>Dallas (Dallas)</strong><br>
-                        <small class="text-muted">dallas@ahoy.ooo</small>
-                    </div>
-                    <div class="emergency-contact mb-2">
-                        <strong>Matt Grant (Dominic)</strong><br>
-                        <small class="text-muted">matt@ahoy.ooo</small>
-                    </div>
-                    <div class="emergency-contact">
-                        <strong>Alex (Director)</strong><br>
-                        <small class="text-muted">alex@ahoy.ooo</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Quick Links -->
-    <div class="row mb-4">
-        <div class="col">
-            <h4 class="text-white mb-3">Quick Access</h4>
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">CALL SHEETS</h5>
-                            <p class="card-text small">View current and upcoming
-                                call sheets</p>
-                            <a href="{{ url_for('crew_callsheets') }}"
-                                class="btn btn-outline-primary btn-sm">View</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">SCRIPTS</h5>
-                            <p class="card-text small">Download latest scripts
-                                and sides</p>
-                            <a href="{{ url_for('crew_scripts') }}"
-                                class="btn btn-outline-primary btn-sm">View</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">STORYBOARDS</h5>
-                            <p class="card-text small">Visual guides and
-                                references</p>
+                        <div class="col-6 mb-2">
                             <a href="{{ url_for('crew_storyboards') }}"
-                                class="btn btn-outline-primary btn-sm">View</a>
+                                class="btn btn-outline-success w-100">
+                                <i class="fas fa-images"></i><br>Storyboards
+                            </a>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <a href="{{ url_for('crew_dailies') }}"
+                                class="btn btn-outline-info w-100">
+                                <i class="fas fa-video"></i><br>Dailies
+                            </a>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <a href="{{ url_for('crew_documents') }}"
+                                class="btn btn-outline-warning w-100">
+                                <i class="fas fa-file"></i><br>Documents
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">SCHEDULE</h5>
-                            <p class="card-text small">Production calendar and
-                                timeline</p>
-                            <a href="{{ url_for('crew_schedule') }}"
-                                class="btn btn-outline-primary btn-sm">View</a>
-                        </div>
-                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-info-circle"></i>
+                        Emergency Contacts</h5>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">CONTACTS</h5>
-                            <p class="card-text small">Cast, crew, and vendor
-                                directory</p>
-                            <a href="{{ url_for('crew_contacts') }}"
-                                class="btn btn-outline-primary btn-sm">View</a>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 mb-2">
+                            <div class="text-center">
+                                <strong>Dylan (Mac)</strong><br>
+                                <small class="text-muted">dylan@ahoy.ooo</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="text-center">
+                                <strong>Dallas (Dallas)</strong><br>
+                                <small
+                                    class="text-muted">dallas@ahoy.ooo</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="text-center">
+                                <strong>Matt Grant (Dominic)</strong><br>
+                                <small class="text-muted">matt@ahoy.ooo</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="text-center">
+                                <strong>Alex (Director)</strong><br>
+                                <small class="text-muted">alex@ahoy.ooo</small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -327,29 +227,6 @@
         </div>
     </div>
 
-    <!-- Recent Announcements -->
-    {% if posts %}
-    <div class="row">
-        <div class="col">
-            <h4 class="text-white mb-3">Recent Announcements</h4>
-            <div class="row">
-                {% for post in posts %}
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title">{{ post.title }}</h6>
-                            <p class="card-text small text-muted">{{
-                                post.created_at.strftime('%B %d, %Y') }}</p>
-                            <p class="card-text small">{{ post.excerpt or
-                                post.content[:100] + '...' }}</p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    {% endif %}
 </div>
 {% endblock %}
 

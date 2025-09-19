@@ -546,12 +546,47 @@ if __name__ == '__main__':
         # Create initial call sheet for September 21st
         create_tables()
     
+# Debug Console Routes
+@app.route('/debug', methods=['GET', 'POST'])
+def debug_console():
+    """Debug console with password protection"""
+    if request.method == 'POST':
+        password = request.form.get('password')
+        if password == app.config['CREW_PASSWORD']:
+            session['debug_logged_in'] = True
+            return redirect(url_for('debug_console'))
+        else:
+            flash('Invalid password. Access denied.', 'error')
+    
+    if not session.get('debug_logged_in'):
+        return render_template('debug/login.html')
+    
+    # Get system information
+    scenes = Scene.query.count()
+    call_sheets = CallSheet.query.count()
+    contacts = Contact.query.count()
+    documents = Document.query.count()
+    
+    return render_template('debug/console.html', 
+                         scenes=scenes, 
+                         call_sheets=call_sheets, 
+                         contacts=contacts, 
+                         documents=documents)
+
+@app.route('/debug/logout')
+def debug_logout():
+    """Debug console logout"""
+    session.pop('debug_logged_in', None)
+    flash('Debug session ended.', 'info')
+    return redirect(url_for('debug_console'))
+
     # Try to find an available port
     port = find_available_port(5000, 20)  # Try ports 5000-5019
     if port:
         print(f"🚀 Starting BARNACLE on port {port}")
         print(f"🌐 Access at: http://localhost:{port}")
         print(f"🔑 Crew Portal: http://localhost:{port}/crew/login")
+        print(f"🐛 Debug Console: http://localhost:{port}/debug")
         app.run(debug=True, host='0.0.0.0', port=port)
     else:
         print("❌ No available ports found. Please free up a port and try again.")
